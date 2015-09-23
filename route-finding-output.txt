@@ -1,0 +1,65 @@
+CL-USER> (load "aima.lisp")
+
+;;QUESTION 1
+CL-USER> (defvar random-route-problem (make-route-finding-problem))
+RANDOM-ROUTE-PROBLEM
+CL-USER> (solve random-route-problem)
+Action               State
+======               =====
+                     A
+B                    B
+======               =====
+Total of 1 node expanded.
+#<NODE f(54) = g(54) + h(0) state:B>
+CL-USER> (inspect random-route-problem)
+The object is a STRUCTURE-OBJECT of type ROUTE-FINDING-PROBLEM.
+0. INITIAL-STATE: A
+1. GOAL: B
+2. NUM-EXPANDED: 1
+3. ITERATIVE?: NIL
+4. MAP: ((J (42 82) ((C . 74) (G . 28) (H . 66) (I . 28) (D . 22) (E . 19)))
+         (I (51 55) ((C . 64) (D . 64) (A . 47) (H . 60) (J . 28) (E . 22)))
+         (H (33 17) ((J . 66) (A . 95) (B . 87) (E . 66) (I . 60)))
+         (G (16 89) ((J . 28) (F . 16))) 
+         (F (26 95) ((D . 23) (G . 16)))
+         (E (37 68) ((H . 66) (I . 22) (J . 19)))
+         (D (43 99) ((F . 23) (I . 64) (J . 22)))
+         (C (97 58) ((J . 74) (B . 67) (I . 64) (A . 18)))
+         (B (95 5) ((A . 54) (C . 67) (H . 87)))
+         (A (92 44) ((B . 54) (C . 18) (H . 95) (I . 47))))
+> (quit)
+;;There are 10 cities in the map, the start city is "A" the destination is "B"
+
+;;QUESTION 2
+CL-USER> (defvar my-romanian-problem (make-romanian-problem :goal 'Neamt :initial-state 'Eforie))
+MY-ROMANIAN-PROBLEM
+CL-USER> (solve my-romanian-problem  'breadth-first-search)
+Action               State
+======               =====
+                     EFORIE
+HIRSOVA              HIRSOVA
+URZICENI             URZICENI
+VASLUI               VASLUI
+IASI                 IASI
+NEAMT                NEAMT
+======               =====
+Total of 31 nodes expanded.
+#<NODE f(505) = g(505) + h(0) state:NEAMT>
+
+;; Solved using breadth first search
+
+;;QUESTION 3
+CL-USER> (solve my-romanian-problem)
+Action               State
+======               =====
+                     EFORIE
+HIRSOVA              HIRSOVA
+URZICENI             URZICENI
+VASLUI               VASLUI
+IASI                 IASI
+NEAMT                NEAMT
+======               =====
+Total of 6 nodes expanded.
+#<NODE f(505) = g(505) + h(0) state:NEAMT>
+CL-USER> 
+;; Solved using the default A* search.
