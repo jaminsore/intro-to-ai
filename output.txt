@@ -1,0 +1,1145 @@
+Script started on Sat 19 Sep 2015 06:28:30 PM CDT
+]0;benjamin@benjamin-Lenovo-IdeaPad-P500: ~/aimabenjamin@benjamin-Lenovo-IdeaPad-P500:~/aima$ clisp
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "aima.lisp")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file aima.lisp ...
+;;  Loading file /home/benjamin/aima/utilities/utilities.fas ...
+;;  Loaded file /home/benjamin/aima/utilities/utilities.fas
+;;  Loading file /home/benjamin/aima/utilities/binary-tree.fas ...
+;;  Loaded file /home/benjamin/aima/utilities/binary-tree.fas
+;;  Loading file /home/benjamin/aima/utilities/queue.fas ...
+;;  Loaded file /home/benjamin/aima/utilities/queue.fas
+;;  Loading file /home/benjamin/aima/utilities/cltl2.fas ...
+;;  Loaded file /home/benjamin/aima/utilities/cltl2.fas
+;;  Loading file /home/benjamin/aima/utilities/test-utilities.fas ...
+;;  Loaded file /home/benjamin/aima/utilities/test-utilities.fas
+;; Loaded file aima.lisp
+T
+[2]> (aima-load 'agents)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file /home/benjamin/aima/agents/test-agents.fas ...
+;; Loaded file /home/benjamin/aima/agents/test-agents.fas
+;; Loading file /home/benjamin/aima/agents/environments/basic-env.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/basic-env.fas
+;; Loading file /home/benjamin/aima/agents/environments/grid-env.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/grid-env.fas
+;; Loading file /home/benjamin/aima/agents/environments/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/vacuum.fas
+;; Loading file /home/benjamin/aima/agents/environments/wumpus.fas ...
+** - Continuable Error
+DEFUN/DEFMACRO(KILL): #<PACKAGE POSIX> is locked
+If you continue (by typing 'continue'): Ignore the lock and proceed
+The following restarts are also available:
+SKIP           :R1      skip 93 97 (DEFUN KILL (OBJECT) ...)-16
+RETRY          :R2      retry 93 97 (DEFUN KILL (OBJECT) ...)-16
+STOP           :R3      stop loading file /home/benjamin/aima/agents/environments/wumpus.fas
+ABORT          :R4      Abort main loop
+Break 1 [3]> continue
+WARNING: DEFUN/DEFMACRO: redefining function KILL in
+         /home/benjamin/aima/agents/environments/wumpus.fas, was defined in C
+;; Loaded file /home/benjamin/aima/agents/environments/wumpus.fas
+;; Loading file /home/benjamin/aima/agents/agents/agent.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/agent.fas
+;; Loading file /home/benjamin/aima/agents/agents/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/vacuum.fas
+;; Loading file /home/benjamin/aima/agents/agents/wumpus.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/wumpus.fas
+;; Loading file /home/benjamin/aima/agents/algorithms/grid.fas ...
+;; Loaded file /home/benjamin/aima/agents/algorithms/grid.fas
+T
+[4]> (aima [K0[K-load 'search)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file /home/benjamin/aima/search/test-search.fas ...
+;; Loaded file /home/benjamin/aima/search/test-search.fas
+;; Loading file /home/benjamin/aima/search/algorithms/problems.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/problems.fas
+;; Loading file /home/benjamin/aima/search/algorithms/simple.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/simple.fas
+;; Loading file /home/benjamin/aima/search/algorithms/repeated.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/repeated.fas
+;; Loading file /home/benjamin/aima/search/algorithms/csp.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/csp.fas
+;; Loading file /home/benjamin/aima/search/algorithms/ida.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/ida.fas
+;; Loading file /home/benjamin/aima/search/algorithms/iterative.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/iterative.fas
+;; Loading file /home/benjamin/aima/search/algorithms/sma.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/sma.fas
+;; Loading file /home/benjamin/aima/search/algorithms/minimax.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/minimax.fas
+;; Loading file /home/benjamin/aima/search/environments/games.fas ...
+;; Loaded file /home/benjamin/aima/search/environments/games.fas
+;; Loading file /home/benjamin/aima/search/environments/prob-solve.fas ...
+;; Loaded file /home/benjamin/aima/search/environments/prob-solve.fas
+;; Loading file /home/benjamin/aima/search/domains/cannibals.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/cannibals.fas
+;; Loading file /home/benjamin/aima/search/domains/ttt.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/ttt.fas
+;; Loading file /home/benjamin/aima/search/domains/cognac.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/cognac.fas
+;; Loading file /home/benjamin/aima/search/domains/nqueens.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/nqueens.fas
+;; Loading file /home/benjamin/aima/search/domains/path-planning.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/path-planning.fas
+;; Loading file /home/benjamin/aima/search/domains/puzzle8.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/puzzle8.fas
+;; Loading file /home/benjamin/aima/search/domains/route-finding.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/route-finding.fas
+;; Loading file /home/benjamin/aima/search/domains/tsp.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/tsp.fas
+;; Loading file /home/benjamin/aima/search/domains/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/vacuum.fas
+;; Loading file /home/benjamin/aima/search/agents/ps-agents.fas ...
+;; Loaded file /home/benjamin/aima/search/agents/ps-agents.fas
+;; Loading file /home/benjamin/aima/search/agents/ttt-agent.fas ...
+;; Loaded file /home/benjamin/aima/search/agents/ttt-agent.fas
+T
+[5]> (aima [K-compile 'agents)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Compiling file /home/benjamin/aima/agents/test-agents.lisp ...
+;; Wrote file /home/benjamin/aima/agents/test-agents.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/test-agents.fas ...
+;; Loaded file /home/benjamin/aima/agents/test-agents.fas
+;; Compiling file /home/benjamin/aima/agents/environments/basic-env.lisp ...
+;; Wrote file /home/benjamin/aima/agents/environments/basic-env.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/environments/basic-env.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/basic-env.fas
+;; Compiling file /home/benjamin/aima/agents/environments/grid-env.lisp ...
+;; Wrote file /home/benjamin/aima/agents/environments/grid-env.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/environments/grid-env.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/grid-env.fas
+;; Compiling file /home/benjamin/aima/agents/environments/vacuum.lisp ...
+;; Wrote file /home/benjamin/aima/agents/environments/vacuum.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/environments/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/vacuum.fas
+;; Compiling file /home/benjamin/aima/agents/environments/wumpus.lisp ...
+;; Wrote file /home/benjamin/aima/agents/environments/wumpus.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/environments/wumpus.fas ...
+;; Loaded file /home/benjamin/aima/agents/environments/wumpus.fas
+;; Compiling file /home/benjamin/aima/agents/agents/agent.lisp ...
+;; Wrote file /home/benjamin/aima/agents/agents/agent.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/agents/agent.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/agent.fas
+;; Compiling file /home/benjamin/aima/agents/agents/vacuum.lisp ...
+;; Wrote file /home/benjamin/aima/agents/agents/vacuum.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/agents/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/vacuum.fas
+;; Compiling file /home/benjamin/aima/agents/agents/wumpus.lisp ...
+;; Wrote file /home/benjamin/aima/agents/agents/wumpus.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/agents/wumpus.fas ...
+;; Loaded file /home/benjamin/aima/agents/agents/wumpus.fas
+;; Compiling file /home/benjamin/aima/agents/algorithms/grid.lisp ...
+;; Wrote file /home/benjamin/aima/agents/algorithms/grid.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/agents/algorithms/grid.fas ...
+;; Loaded file /home/benjamin/aima/agents/algorithms/grid.fas
+T
+[6]> (aima-compile 'serac[K[K[Karch)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Compiling file /home/benjamin/aima/search/test-search.lisp ...
+;; Wrote file /home/benjamin/aima/search/test-search.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/test-search.fas ...
+;; Loaded file /home/benjamin/aima/search/test-search.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/problems.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/problems.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/problems.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/problems.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/simple.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/simple.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/simple.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/simple.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/repeated.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/repeated.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/repeated.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/repeated.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/csp.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/csp.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/csp.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/csp.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/ida.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/ida.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/ida.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/ida.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/iterative.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/iterative.fas
+The following functions were used but not defined:
+ CSP-GOALP
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/iterative.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/iterative.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/sma.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/sma.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/sma.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/sma.fas
+;; Compiling file /home/benjamin/aima/search/algorithms/minimax.lisp ...
+;; Wrote file /home/benjamin/aima/search/algorithms/minimax.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/algorithms/minimax.fas ...
+;; Loaded file /home/benjamin/aima/search/algorithms/minimax.fas
+;; Compiling file /home/benjamin/aima/search/environments/games.lisp ...
+;; Wrote file /home/benjamin/aima/search/environments/games.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/environments/games.fas ...
+;; Loaded file /home/benjamin/aima/search/environments/games.fas
+;; Compiling file /home/benjamin/aima/search/environments/prob-solve.lisp ...
+;; Wrote file /home/benjamin/aima/search/environments/prob-solve.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/environments/prob-solve.fas ...
+;; Loaded file /home/benjamin/aima/search/environments/prob-solve.fas
+;; Compiling file /home/benjamin/aima/search/domains/cannibals.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/cannibals.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/cannibals.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/cannibals.fas
+;; Compiling file /home/benjamin/aima/search/domains/ttt.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/ttt.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/ttt.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/ttt.fas
+;; Compiling file /home/benjamin/aima/search/domains/cognac.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/cognac.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/cognac.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/cognac.fas
+;; Compiling file /home/benjamin/aima/search/domains/nqueens.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/nqueens.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/nqueens.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/nqueens.fas
+;; Compiling file /home/benjamin/aima/search/domains/path-planning.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/path-planning.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/path-planning.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/path-planning.fas
+;; Compiling file /home/benjamin/aima/search/domains/puzzle8.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/puzzle8.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/puzzle8.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/puzzle8.fas
+;; Compiling file /home/benjamin/aima/search/domains/route-finding.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/route-finding.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/route-finding.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/route-finding.fas
+;; Compiling file /home/benjamin/aima/search/domains/tsp.lisp ...
+;; Wrote file /home/benjamin/aima/search/domains/tsp.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/domains/tsp.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/tsp.fas
+;; Compiling file /home/benjamin/aima/search/domains/vacuum.lisp ...
+WARNING: in VACUUM-PROBLEM in lines 15..26 : keyword :SUCCESSOR-FN is not allowed for
+         function MAKE-PROBLEM.
+         The only allowed keywords are :INITIAL-STATE, :GOAL, :NUM-EXPANDED and :ITERATIVE?.
+;; Wrote file /home/benjamin/aima/search/domains/vacuum.fas
+0 errors, 1 warning
+;; Loading file /home/benjamin/aima/search/domains/vacuum.fas ...
+;; Loaded file /home/benjamin/aima/search/domains/vacuum.fas
+;; Compiling file /home/benjamin/aima/search/agents/ps-agents.lisp ...
+;; Wrote file /home/benjamin/aima/search/agents/ps-agents.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/agents/ps-agents.fas ...
+;; Loaded file /home/benjamin/aima/search/agents/ps-agents.fas
+;; Compiling file /home/benjamin/aima/search/agents/ttt-agent.lisp ...
+;; Wrote file /home/benjamin/aima/search/agents/ttt-agent.fas
+0 errors, 0 warnings
+;; Loading file /home/benjamin/aima/search/agents/ttt-agent.fas ...
+;; Loaded file /home/benjamin/aima/search/agents/ttt-agent.fas
+T
+[7]> (test'[K 'search)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Testing System SEARCH
+;;; Test the code for Solving Problems by Searching
+;;; Start with a trivial version of the missionaries and cannibals puzzle.
+> (SETQ P1 (MAKE-CANNIBAL-PROBLEM :INITIAL-STATE (MAKE-CANNIBAL-STATE :M1 2 :C1 1)))
+#<a CANNIBAL-PROBLEM>
+;;; We search for a solution node:
+> (SETQ RESULT (BREADTH-FIRST-SEARCH P1))
+#<NODE f(3) = g(3) + h(0) state:(0 0 0 2 1 1)>
+;;; We can get information out of that solution:
+> (SOLUTION-ACTIONS RESULT)
+((2 0 1) (-1 0 -1) (1 1 1))
+> (SOLUTION-NODES RESULT)
+(#<NODE f(0) = g(0) + h(0) state:(2 1 1 0 0 0)>
+ #<NODE f(1) = g(1) + h(0) state:(0 1 0 2 0 1)>
+ #<NODE f(2) = g(2) + h(0) state:(1 1 1 1 0 0)>
+ #<NODE f(3) = g(3) + h(0) state:(0 0 0 2 1 1)>)
+;;; 
+Or we can use SOLVE to print the results nicely. By default, SOLVE
+  uses A*-search, but you can give it another algorithm as the second arg.
+> (SOLVE P1)
+Action               State
+======               =====
+                     (2 1 1 0 0 0)
+(1 1 1)              (1 0 0 1 1 1)
+(-1 0 -1)            (2 0 1 0 1 0)
+(2 0 1)              (0 0 0 2 1 1)
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(3) = g(3) + h(0) state:(0 0 0 2 1 1)>
+;;; For the full 3 missionary and 3 cannibal problem, breadth-first-search
+;;; is very inefficient.  Better to use something that handles repeated states,
+;;; like A*-search or no-duplicates-breadth-first-search:
+> (SOLVE (MAKE-CANNIBAL-PROBLEM) 'A*-SEARCH)
+Action               State
+======               =====
+                     (3 3 1 0 0 0)
+(1 1 1)              (2 2 0 1 1 1)
+(-1 0 -1)            (3 2 1 0 1 0)
+(0 2 1)              (3 0 0 0 3 1)
+(0 -1 -1)            (3 1 1 0 2 0)
+(2 0 1)              (1 1 0 2 2 1)
+(-1 -1 -1)           (2 2 1 1 1 0)
+(2 0 1)              (0 2 0 3 1 1)
+(0 -1 -1)            (0 3 1 3 0 0)
+(0 2 1)              (0 1 0 3 2 1)
+(0 -1 -1)            (0 2 1 3 1 0)
+(0 2 1)              (0 0 0 3 3 1)
+======               =====
+Total of 14 nodes expanded.
+#<NODE f(11) = g(11) + h(0) state:(0 0 0 3 3 1)>
+> (SOLVE (MAKE-CANNIBAL-PROBLEM) 'NO-DUPLICATES-BREADTH-FIRST-SEARCH)
+Action               State
+======               =====
+                     (3 3 1 0 0 0)
+(1 1 1)              (2 2 0 1 1 1)
+(-1 0 -1)            (3 2 1 0 1 0)
+(0 2 1)              (3 0 0 0 3 1)
+(0 -1 -1)            (3 1 1 0 2 0)
+(2 0 1)              (1 1 0 2 2 1)
+(-1 -1 -1)           (2 2 1 1 1 0)
+(2 0 1)              (0 2 0 3 1 1)
+(0 -1 -1)            (0 3 1 3 0 0)
+(0 2 1)              (0 1 0 3 2 1)
+(0 -1 -1)            (0 2 1 3 1 0)
+(0 2 1)              (0 0 0 3 3 1)
+======               =====
+Total of 14 nodes expanded.
+#<NODE f(11) = g(11) + h(0) state:(0 0 0 3 3 1)>
+;;; Here is how to get a problem-solving agent to find the solution,
+;;; and then go ahead and execute the actions that comprise the solution.
+> (RUN-ENVIRONMENT (PROBLEM->ENVIRONMENT P1))
+At Time step 0:
+
+#<PROBLEM-SOLVING-ENVIRONMENT; State: (2 1 1 0 0 0)> 
+At Time step 1:
+Agent [AGENT-BODY> = 0] perceives (2 1 1 0 0 0)
+      and does (1 1 1)
+
+#<PROBLEM-SOLVING-ENVIRONMENT; State: (1 0 0 1 1 1)> 
+At Time step 2:
+Agent [AGENT-BODY> = 0] perceives (1 0 0 1 1 1)
+      and does (-1 0 -1)
+
+#<PROBLEM-SOLVING-ENVIRONMENT; State: (2 0 1 0 1 0)> 
+At Time step 3:
+Agent [AGENT-BODY> = 1] perceives (2 0 1 0 1 0)
+      and does (2 0 1)
+
+#<PROBLEM-SOLVING-ENVIRONMENT; State: (0 0 0 2 1 1)> 
+#<PROBLEM-SOLVING-ENVIRONMENT; State: (0 0 0 2 1 1)>
+;;; Now we look at the route-finding domain.
+;;; First, solve the Arad-to-Bucharest problem with A*-search:
+> (SOLVE (MAKE-ROMANIAN-PROBLEM :INITIAL-STATE 'ARAD :GOAL 'BUCHAREST))
+Action               State
+======               =====
+                     ARAD
+SIBIU                SIBIU
+RIMNICU              RIMNICU
+PITESTI              PITESTI
+BUCHAREST            BUCHAREST
+======               =====
+Total of 5 nodes expanded.
+#<NODE f(418) = g(418) + h(0) state:BUCHAREST>
+;;; Now turn it around:
+> (SOLVE (MAKE-ROMANIAN-PROBLEM :GOAL 'ARAD :INITIAL-STATE 'BUCHAREST))
+Action               State
+======               =====
+                     BUCHAREST
+PITESTI              PITESTI
+RIMNICU              RIMNICU
+SIBIU                SIBIU
+ARAD                 ARAD
+======               =====
+Total of 4 nodes expanded.
+#<NODE f(418) = g(418) + h(0) state:ARAD>
+;;; Let's just see the actions:
+> (SOLUTION-ACTIONS (A*-SEARCH (MAKE-ROMANIAN-PROBLEM)))
+(SIBIU RIMNICU PITESTI BUCHAREST)
+;;; Now on a random map:
+> (SOLVE (MAKE-ROUTE-FINDING-PROBLEM))
+Action               State
+======               =====
+                     A
+G                    G
+B                    B
+======               =====
+Total of 2 nodes expanded.
+#<NODE f(26) = g(26) + h(0) state:B>
+;;; Here's how to compare several algorithms.
+> (SETQ SEARCHERS '(A*-SEARCH NO-CYCLES-DEPTH-FIRST-SEARCH NO-DUPLICATES-BREADTH-FIRST-SEARCH))
+(A*-SEARCH NO-CYCLES-DEPTH-FIRST-SEARCH NO-DUPLICATES-BREADTH-FIRST-SEARCH)
+> (COMPARE-SEARCH-ALGORITHMS #'MAKE-ROUTE-FINDING-PROBLEM SEARCHERS)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    9    73.8    2.1     2.7 A*-SEARCH
+    9   230.3    4.0     5.4 NO-CYCLES-DEPTH-FIRST-SEARCH
+    9    84.8    2.0     5.7 NO-DUPLICATES-BREADTH-FIRST-SEARCH
+NIL
+> (COMPARE-SEARCH-ALGORITHMS #'MAKE-ROMANIAN-PROBLEM SEARCHERS :N 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1   418.0    4.0     5.0 A*-SEARCH
+    1   607.0    5.0     5.0 NO-CYCLES-DEPTH-FIRST-SEARCH
+    1   450.0    3.0    11.0 NO-DUPLICATES-BREADTH-FIRST-SEARCH
+NIL
+> 
+(COMPARE-SEARCH-ALGORITHMS #'MAKE-CANNIBAL-PROBLEM
+ '(NO-RETURNS-BREADTH-FIRST-SEARCH A*-SEARCH NO-DUPLICATES-BREADTH-FIRST-SEARCH) :N 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1    11.0   11.0    55.0 NO-RETURNS-BREADTH-FIRST-SEARCH
+    1    11.0   11.0    14.0 A*-SEARCH
+    1    11.0   11.0    14.0 NO-DUPLICATES-BREADTH-FIRST-SEARCH
+NIL
+> 
+(COMPARE-SEARCH-ALGORITHMS #'MAKE-ROMANIAN-PROBLEM
+ '(TREE-A*-SEARCH A*-SEARCH TREE-IDA*-SEARCH) :N 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1   418.0    4.0     5.0 TREE-A*-SEARCH
+    1   418.0    4.0     5.0 A*-SEARCH
+    1   418.0    4.0    20.0 TREE-IDA*-SEARCH
+NIL
+;;; We'll look at the iterative improvement algorithms on a harder map problem.
+> (SETQ SEARCHERS '(A*-SEARCH HILL-CLIMBING-SEARCH SIMULATED-ANNEALING-SEARCH))
+(A*-SEARCH HILL-CLIMBING-SEARCH SIMULATED-ANNEALING-SEARCH)
+> (COMPARE-SEARCH-ALGORITHMS #'(LAMBDA NIL (MAKE-ROMANIAN-PROBLEM :GOAL 'IASI)) SEARCHERS :N 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1   737.0    7.0    14.0 A*-SEARCH
+    0     0.0    0.0     3.0 HILL-CLIMBING-SEARCH
+    0     0.0    0.0    15.0 SIMULATED-ANNEALING-SEARCH
+NIL
+;;; Let's take a look at the 8-puzzle:
+> (SOLVE (MAKE-8-PUZZLE-PROBLEM))
+Action               State
+======               =====
+                     28012060
+^                    285938092
+<                    286095556
+<                    286118884
+V                    282403900
+>                    261146260
+^                    280251892
+^                    280304308
+>                    280304164
+V                    280127260
+V                    22201228
+<                    175256236
+<                    196513876
+^                    200228860
+>                    200182204
+>                    199867276
+V                    27916588
+<                    219235348
+^                    247893796
+======               =====
+Total of 346 nodes expanded.
+#<NODE f(18) = g(18) + h(0) state:247893796>
+> (COMPARE-SEARCH-ALGORITHMS 'MAKE-8-PUZZLE-PROBLEM '(A*-SEARCH) :N 2)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    2    16.0   16.0    46.0 A*-SEARCH
+NIL
+;;; And the path-planning problem among polygonal obstacles:
+> (SOLVE (MAKE-PATH-PLANNING-PROBLEM :SCENE *SCENE-4.17*))
+Action               State
+======               =====
+                     #<V 112,660>
+(39 10)              #<V 151,670>
+(47 -35)             #<V 198,635>
+(22 -19)             #<V 220,616>
+(60 -33)             #<V 280,583>
+(59 -5)              #<V 339,578>
+(14 -5)              #<V 353,573>
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(270.48468) = g(270.48468) + h(0) state:#<V 353,573>>
+;;; Now the 8-queens problem
+> (SOLVE (MAKE-NQUEENS-PROBLEM) 'CSP-BACKTRACKING-SEARCH)
+Action               State
+======               =====
+                     #<CSP NIL>
+(0 . 7)              #<CSP ((0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(1 . 3)              #<CSP ((1 (0 1 2 3 4 5 6 7) 3 NIL) (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(2 . 0)              #<CSP ((2 (0 1 2 3 4 5 6 7) 0 NIL) (1 (0 1 2 3 4 5 6 7) 3 NIL) (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(3 . 2)              
+#<CSP ((3 (0 1 2 3 4 5 6 7) 2 NIL) (2 (0 1 2 3 4 5 6 7) 0 NIL) (1 (0 1 2 3 4 5 6 7) 3 NIL)
+ (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(4 . 5)              
+#<CSP ((4 (0 1 2 3 4 5 6 7) 5 NIL) (3 (0 1 2 3 4 5 6 7) 2 NIL) (2 (0 1 2 3 4 5 6 7) 0 NIL)
+ (1 (0 1 2 3 4 5 6 7) 3 NIL) (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(5 . 1)              
+#<CSP ((5 (0 1 2 3 4 5 6 7) 1 NIL) (4 (0 1 2 3 4 5 6 7) 5 NIL) (3 (0 1 2 3 4 5 6 7) 2 NIL)
+ (2 (0 1 2 3 4 5 6 7) 0 NIL) (1 (0 1 2 3 4 5 6 7) 3 NIL) (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(6 . 6)              
+#<CSP ((6 (0 1 2 3 4 5 6 7) 6 NIL) (5 (0 1 2 3 4 5 6 7) 1 NIL) (4 (0 1 2 3 4 5 6 7) 5 NIL)
+ (3 (0 1 2 3 4 5 6 7) 2 NIL) (2 (0 1 2 3 4 5 6 7) 0 NIL) (1 (0 1 2 3 4 5 6 7) 3 NIL)
+ (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+(7 . 4)              
+#<CSP ((7 (0 1 2 3 4 5 6 7) 4 NIL) (6 (0 1 2 3 4 5 6 7) 6 NIL) (5 (0 1 2 3 4 5 6 7) 1 NIL)
+ (4 (0 1 2 3 4 5 6 7) 5 NIL) (3 (0 1 2 3 4 5 6 7) 2 NIL) (2 (0 1 2 3 4 5 6 7) 0 NIL)
+ (1 (0 1 2 3 4 5 6 7) 3 NIL) (0 (0 1 2 3 4 5 6 7) 7 NIL))>
+======               =====
+Total of 113 nodes expanded.
+#<NODE f(8) = g(8) + h(0) state:#<CSP ((7 (0 1 2 3 4 5 6 7) 4 NIL)
+ (6 (0 1 2 3 4 5 6 7) 6 NIL) (5 (0 1 2 3 4 5 6 7) 1 NIL) (4 (0 1 2 3 4 5 6 7) 5 NIL)
+ (3 (0 1 2 3 4 5 6 7) 2 NIL) (2 (0 1 2 3 4 5 6 7) 0 NIL) (1 (0 1 2 3 4 5 6 7) 3 NIL)
+ (0 (0 1 2 3 4 5 6 7) 7 NIL))>>
+> 
+(COMPARE-SEARCH-ALGORITHMS 'MAKE-NQUEENS-PROBLEM
+ '(CSP-BACKTRACKING-SEARCH CSP-FORWARD-CHECKING-SEARCH) :N 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1     8.0    8.0   113.0 CSP-BACKTRACKING-SEARCH
+    1     8.0    8.0    53.0 CSP-FORWARD-CHECKING-SEARCH
+NIL
+;;; Here is the Travelling Salesperson Problem (TSP).
+> (SOLVE (MAKE-TSP-PROBLEM))
+Action               State
+======               =====
+                     ((F) (E D C B A))
+D                    ((D F) (E C B A))
+E                    ((E D F) (C B A))
+B                    ((B E D F) (C A))
+A                    ((A B E D F) (C))
+C                    ((C A B E D F) NIL)
+F                    ((F C A B E D F) NIL)
+======               =====
+Total of 28 nodes expanded.
+#<NODE f(240) = g(240) + h(0) state:((F C A B E D F) NIL)>
+> 
+(COMPARE-SEARCH-ALGORITHMS 'MAKE-TSP-PROBLEM '(A*-SEARCH GREEDY-SEARCH UNIFORM-COST-SEARCH)
+ :N 5)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    5   287.6    6.0    22.4 A*-SEARCH
+    5   354.0    6.0     6.0 GREEDY-SEARCH
+    5   382.2    6.0   326.0 UNIFORM-COST-SEARCH
+NIL
+;;; Now we test the environments for 2-player and 3-player games:
+> (RUN-GAME (MAKE-TTT-GAME))
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (1 2).
+   |---|---|---|
+ 2 | - | X | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (2 0).
+   |---|---|---|
+ 2 | - | X | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | O |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (2 2).
+   |---|---|---|
+ 2 | - | X | X |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | O |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (0 0).
+   |---|---|---|
+ 2 | - | X | X |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | O | - | O |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (0 2).
+   |---|---|---|
+ 2 | X | X | X |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | O | - | O |
+   |---|---|---|
+     0   1   2 
+O to move:
+#<GAME-ENVIRONMENT; Step: 5, Agents: [X = 1] [O = -1]>
+> (RUN-GAME (MAKE-COGNAC-GAME :PLAYERS '(X O @)))
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (0 0).
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | X | - | - |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (1 0).
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | X | O | - |
+   |---|---|---|
+     0   1   2 
+@ to move:
+@ moved to (2 0).
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (1 1).
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | X | - |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (1 2).
+   |---|---|---|
+ 2 | - | O | - |
+   |---|---|---|
+ 1 | - | X | - |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+@ to move:
+@ moved to (2 1).
+   |---|---|---|
+ 2 | - | O | - |
+   |---|---|---|
+ 1 | - | X | @ |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (0 1).
+   |---|---|---|
+ 2 | - | O | - |
+   |---|---|---|
+ 1 | X | X | @ |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (2 2).
+   |---|---|---|
+ 2 | - | O | O |
+   |---|---|---|
+ 1 | X | X | @ |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+@ to move:
+@ moved to (0 2).
+   |---|---|---|
+ 2 | @ | O | O |
+   |---|---|---|
+ 1 | X | X | @ |
+   |---|---|---|
+ 0 | X | O | @ |
+   |---|---|---|
+     0   1   2 
+X to move:
+#<GAME-ENVIRONMENT; Step: 9, Agents: [X = 0] [O = 0] [@ = 0]>
+;;; Now we see that 2x2 tic-tac-toe is a win for the first player, X.
+> (RUN-GAME (MAKE-TTT-GAME :N 2) :AGENTS '(ALPHA-BETA-TTT-AGENT ALPHA-BETA-TTT-AGENT))
+   |---|---|
+ 1 | - | - |
+   |---|---|
+ 0 | - | - |
+   |---|---|
+     0   1 
+X to move:
+X moved to (1 1).
+   |---|---|
+ 1 | - | X |
+   |---|---|
+ 0 | - | - |
+   |---|---|
+     0   1 
+O to move:
+O moved to (1 0).
+   |---|---|
+ 1 | - | X |
+   |---|---|
+ 0 | - | O |
+   |---|---|
+     0   1 
+X to move:
+X moved to (0 1).
+   |---|---|
+ 1 | X | X |
+   |---|---|
+ 0 | - | O |
+   |---|---|
+     0   1 
+O to move:
+#<GAME-ENVIRONMENT; Step: 3, Agents: [X = 1] [O = -1]>
+;;; In a full 3x3 game, alpha-beta search (playing O) often wins.
+> (RUN-GAME (MAKE-TTT-GAME) :AGENTS '(RANDOM-GAME-AGENT ALPHA-BETA-TTT-AGENT))
+   |---|---|---|
+ 2 | - | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (0 2).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | - | - | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (1 1).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | - | O | - |
+   |---|---|---|
+ 0 | - | - | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (0 0).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | - | O | - |
+   |---|---|---|
+ 0 | X | - | - |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (0 1).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | O | O | - |
+   |---|---|---|
+ 0 | X | - | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+X moved to (1 0).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | O | O | - |
+   |---|---|---|
+ 0 | X | X | - |
+   |---|---|---|
+     0   1   2 
+O to move:
+O moved to (2 1).
+   |---|---|---|
+ 2 | X | - | - |
+   |---|---|---|
+ 1 | O | O | O |
+   |---|---|---|
+ 0 | X | X | - |
+   |---|---|---|
+     0   1   2 
+X to move:
+#<GAME-ENVIRONMENT; Step: 6, Agents: [X = -1] [O = 1]>
+
+ 0 errors on system SEARCH
+0
+[8]> (test 'agents)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Testing System AGENTS
+;;; Test agents in the vacuum and wumpus worlds.
+;;; Here is how to run an environment, in this case the vacuum world.
+;;; We specify the maximum number of steps, but that is optional:
+> (RUN-ENVIRONMENT (MAKE-VACUUM-WORLD :MAX-STEPS 10))
+At Time step 0:
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  |    |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  | 1> |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 1:
+Agent [1 = -1] perceives (NIL NIL HOME)
+      and does SUCK
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  |    |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  | 1> |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 2:
+Agent [1 = -1002] perceives (NIL NIL HOME)
+      and does FORWARD
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  |    |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  |    | 1> |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 3:
+Agent [1 = -1003] perceives (NIL NIL NIL)
+      and does (TURN RIGHT)
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  |    |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  |    | 1V |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 4:
+Agent [1 = -1004] perceives (NIL NIL NIL)
+      and does SHUT-OFF
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  |    | *  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  |    |    |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  |    | 1  |    |    |    |    | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+#<VACUUM-WORLD; Step: 4, Agents: [1 = -1004]>
+;;; You can turn off the display (with :stream nil), and just see the results:
+> (RUN-ENVIRONMENT (MAKE-VACUUM-WORLD :STREAM NIL))
+#<VACUUM-WORLD; Step: 6, Agents: [1 = -6]>
+;;; You can customize several things, such as the agent(s) in the world.
+;;; By default, a vacuum-world has a random-agent; we can change that to
+;;; a slightly smarter agent with the :ASPEC (Agent SPECification) keyword:
+> (RUN-ENVIRONMENT (MAKE-VACUUM-WORLD :STREAM NIL :ASPEC '(REACTIVE-VACUUM-AGENT)))
+#<VACUUM-WORLD; Step: 74, Agents: [1 = 326]>
+;;; We can change the probability of dirt in each cell using the :CSPEC
+;;; keyword (Custom SPECification).  It allows a complex language for
+;;; specifying objects and where they go.
+> (RUN-ENVIRONMENT (MAKE-VACUUM-WORLD :CSPEC '((AT ALL (P 0.9 DIRT))) :MAX-STEPS 10))
+At Time step 0:
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  | 1> | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 1:
+Agent [1 = -1001] perceives (NIL NIL HOME)
+      and does FORWARD
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  |    |1>* | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+At Time step 2:
+Agent [1 = -1002] perceives (NIL DIRT NIL)
+      and does SHUT-OFF
+    |----|----|----|----|----|----|----|----|
+ 7  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+ 6  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 5  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 4  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 3  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 2  | #  | *  | *  | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 1  | #  |    | 1* | *  | *  | *  | *  | #  |
+    |----|----|----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|----|----|
+      0    1    2    3    4    5    6    7  
+#<VACUUM-WORLD; Step: 2, Agents: [1 = -1002]>
+;;; Finally, we can compare 2 or more agents over a number of trials:
+> (AGENT-TRIALS 'MAKE-VACUUM-WORLD '(REACTIVE-VACUUM-AGENT RANDOM-VACUUM-AGENT) :N 10)
+    128.50 average for REACTIVE-VACUUM-AGENT
+   -396.40 average for RANDOM-VACUUM-AGENT
+(128.5 -396.4)
+;;; Now for the wumpus world
+> (RUN-ENVIRONMENT (MAKE-WUMPUS-WORLD :MAX-STEPS 10))
+At Time step 0:
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | O  | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  | 1> |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 1:
+Agent [1 = -1] perceives (NIL BREEZE NIL NIL NIL)
+      and does (TURN RIGHT)
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | O  | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  | 1V |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 2:
+Agent [1 = -2] perceives (NIL BREEZE NIL NIL NIL)
+      and does FORWARD
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | O  | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  | 1V |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 3:
+Agent [1 = -3] perceives (NIL BREEZE NIL BUMP NIL)
+      and does (TURN RIGHT)
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | O  | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  | 1< |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 4:
+Agent [1 = -4] perceives (NIL BREEZE NIL NIL NIL)
+      and does (TURN RIGHT)
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | O  | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  | 1^ |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 5:
+Agent [1 = -5] perceives (NIL BREEZE NIL NIL NIL)
+      and does FORWARD
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  |1^O | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+At Time step 6:
+Agent [1 = -10006] perceives (NIL BREEZE NIL NIL NIL)
+      and does (TURN LEFT)
+    |----|----|----|----|----|----|
+ 5  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+ 4  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 3  | #  |    |OW> |    |    | #  |
+    |----|----|----|----|----|----|
+ 2  | #  | 1O | $  |    |    | #  |
+    |----|----|----|----|----|----|
+ 1  | #  |    |    |    |    | #  |
+    |----|----|----|----|----|----|
+ 0  | #  | #  | #  | #  | #  | #  |
+    |----|----|----|----|----|----|
+      0    1    2    3    4    5  
+#<WUMPUS-WORLD; Step: 6, Agents: [1 = -10006]>
+
+ 0 errors on system AGENTS
+0
+[9]> *[K(quit)[C[C[C[C[C[C
+Bye.
+]0;benjamin@benjamin-Lenovo-IdeaPad-P500: ~/aimabenjamin@benjamin-Lenovo-IdeaPad-P500:~/aima$ exit
+
+Script done on Sat 19 Sep 2015 06:30:36 PM CDT
