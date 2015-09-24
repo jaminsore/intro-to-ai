@@ -60,15 +60,24 @@
       Precisely 1 gallon of water in the 2G.
       \item the actions (called in the textbook successor function)
       \begin{enumerate}
-        \item \texttt{pour\_into(PouringJug, ReceivingJug)}
+        \item \texttt{pour\_into(PouringJug, ReceivingJug)} \par
+        \emph{Definition}: if the amount of water in \texttt{PouringJug}
+        (\(g1\)) plus the amount of water in \texttt{ReceivingJug} (\(g2\)) is
+        \(\le\) to the capacity of \texttt{ReceivingJug} (\(G2\)), the amount of
+        water in \texttt{ReceivingJug} is set to \(g1 + g2\), otherwise,  fill
+        \texttt{RecievingJug} to \(G2\) and set the level of \texttt{PouringJug}
+        to \(g1 + g2 - G2\)
         \par 
         Example: \[RESULT(\lbrace 5G : 5, 2G:0\rbrace, pour\_into(5G,
         2G)) = \lbrace 5G : 3, 2G:2\rbrace\]
         \item \texttt{empty(Jug)}
+        \par\emph{Definition}: set the level of \texttt{Jug} to \(0\)
         \par
         Example: \[RESULT(\lbrace 5G : 5, 2G : 0\rbrace, empty(5G)) = \lbrace
         5G:0, 2G : 0 \rbrace\]
         \item \texttt{fill(Jug)}
+        \par\emph{Definition}: set the level of \texttt{Jug} to its maximum
+        capacity
         \par
         Example: \[RESULT(\lbrace 5G : 5, 2G : 0\rbrace, fill(2G)) = \lbrace
         5G:5, 2G : 2 \rbrace\]
@@ -81,10 +90,12 @@
       The state-space is any state of fullness of the two-gallon and
       five-gallon jugs reachable by the actions \texttt{pour\_into(Jug1, Jug2)},
       \texttt{fill(Jug)}, and \texttt{empty(Jug)} performed on the initial state
-      and any resultant states.
+      and any resultant states.  Though other states are possible, any state can
+      be trivially converted to one of the states reachable by the initial state
+      in this problem definition in at most two actions.
       \item is the state-space a tree or a graph?
       \par
-      The sate space if a graph since there are repeated states.
+      The sate space is a graph since there are repeated states.
       \item what search algorithm would you use and why?
       \par 
       I would use a uniform-cost search because the search space is small, and
