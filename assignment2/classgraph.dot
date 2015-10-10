@@ -1,0 +1,23 @@
+digraph g {
+	rankdir=LR;
+	Start[xlabel="h=10"];
+	B[xlabel="h=7"];
+	C[xlabel="h=10"];
+	D[xlabel="h=3"];
+	E[xlabel="h=1"];
+	F[xlabel="h=2"];
+	G[xlabel="h=2"];
+	Goal
+	
+	Start -> B[label="11"];
+	Start -> C[label="6"];
+	B -> D[label="4"];
+	B -> E[label="3"];
+	C -> E[label="10"];
+	C -> F[label="3"];
+	D -> Goal[label="3"];
+	E -> Goal[label="5"];
+	F -> G[label="1"];
+	G -> E[label="4"];
+
+}

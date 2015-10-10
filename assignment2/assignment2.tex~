@@ -1,0 +1,11 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 2}
+\maketitle
+
+\section{Question 1}
+\begin{enumerate}
+\item first
+
+\end{document}

@@ -1,0 +1,19 @@
+CL-USER> (load "aima.lisp")
+CL-USER> (aima-load 'agents)
+CL-USER> (aima-load 'search)
+CL-USER> (setq searchers '(a*-search no-returns-breadth-first-search no-duplicates-breadth-first-search breadth-first-search))
+(A*-SEARCH NO-RETURNS-BREADTH-FIRST-SEARCH NO-DUPLICATES-BREADTH-FIRST-SEARCH
+           BREADTH-FIRST-SEARCH)
+CL-USER> (compare-search-algorithms #'make-cannibal-problem searchers :n 1)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    1    11.0   11.0    14.0 A*-SEARCH
+    1    11.0   11.0    55.0 NO-RETURNS-BREADTH-FIRST-SEARCH
+    1    11.0   11.0    14.0 NO-DUPLICATES-BREADTH-FIRST-SEARCH
+    1    11.0   11.0 11877.0 BREADTH-FIRST-SEARCH
+CL-USER> (compare-search-algorithms #'(lambda()(make-cannibal-problem :initial-state (make-cannibal-state :m1 4 :c1 4 :b1 1))) searchers)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    0     0.0    0.0    11.0 A*-SEARCH
+    
+;; Looks like 4 missionaries, 4 cannibals, and 1 boat is not possible

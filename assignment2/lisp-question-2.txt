@@ -1,0 +1,18 @@
+CL-USER> (load "aima.lisp")
+CL-USER> (aima-load)
+CL-USER> (setq searchers '(a*-search greedy-search depth-first-search))
+CL-USER>  (defun tsp-fn-factory (&key (n 15))
+	    (let ((tsp
+		   (make-tsp-problem :map (random-tsp-map :n-cities n))
+		  ))
+	      #'(lambda() tsp)
+	      ))
+STYLE-WARNING: redefining COMMON-LISP-USER::TSP-FN-FACTORY in DEFUN
+TSP-FN-FACTORY
+CL-USER> (compare-search-algorithms (tsp-fn-factory :n 15) searchers :n 5)
+Solved  Cost  Length  Nodes  Algorithm
+====== ====== ====== ======= =========
+    5   435.0   15.0 44604.0 A*-SEARCH
+    5   849.0   15.0 74391.0 GREEDY-SEARCH
+    5  1103.0   15.0 74470.0 DEPTH-FIRST-SEARCH
+CL-USER> 

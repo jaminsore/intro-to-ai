@@ -1,0 +1,12 @@
+digraph g{
+	rankdir=LR
+	Start;
+	B[xlabel="h=1\nf(B)=6"];
+	C[xlabel="h=2\nf(C)=8"];
+	Goal;
+	Start -> B[label="5", color="#FF0000"];
+	Start -> C[label="6", color="#00FF00"];
+	B -> Goal[label="4", color="#FF0000", xlabel="f(Goal)=9"];
+	C -> Goal[label="1", color="#00FF00", xlabel="f(Goal)=7"];
+}
+	
