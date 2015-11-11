@@ -1,0 +1,173 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 4}
+\maketitle
+\begin{enumerate}[label=\bfseries Question \arabic*:]
+\item
+  \begin{enumerate}
+  \item Sentences in CNF (for sentence number two, I took it to mean
+    ``It is not hot, and if it's sunny, then it's pleasant'' instead
+    of ``If it's hot and sunny, then it's pleasnt'':
+    \begin{enumerate}[label= KB\arabic*.]
+    \item \(\lnot Humid \lor \lnot Hot \lor Sticky \)
+    \item \(\lnot Hot\)
+    \item \(\lnot Sunny \lor Pleasant\)
+    \item \(Sunny\)
+    \item \(Humid\)
+    \item\(Sunny \lor Pleasant\)
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+    \item \(\lnot Sticky\) (assumption)
+    \item \(\lnot Pleasant\) (assumption)
+    \item \(Pleasant \) (from KB3 and KB4)
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+    \item \(\lnot Sticky \lor \lnot Pleasant\) (assumption)
+    \item \(Pleasant \) (from KB3 and KB4)
+    \item \(\lnot Sticky\) (from ii. and i.)
+    \item \dots Here is where I run into a dead end. I don't think
+      this can be proven from the collection of sentences. We can
+      conclude that it's either \(Sticky\)
+      or \(Pleasant\),
+      but we can't say that it is both \(Sticky\)
+      and \(Pleasant\).
+      It could be that it's both \(Sticky\)
+      and \(Pleasant\),
+      but we can't tell from this collection of sentences.
+    \end{enumerate}
+  \end{enumerate}
+\item
+  \begin{proof} Let \(S\)
+    be a statement in CNF such that
+    \(S = P_1 \lor P_2 \lor \dots \lor P_n \lor Q_1 \lor Q_2 \lor
+    \dots \lor Q_m \) then
+    \begin{align*}
+      S = (P_1 \lor P_2 \lor \dots \lor P_n) \lor (Q_1 \lor Q_2 \lor
+      \dots \lor Q_m)       
+      &= \lnot (P_1 \lor P_2 \lor \dots \lor P_n) \rightarrow (Q_1 \lor Q_2 \lor
+        \dots \lor Q_m)                    
+      \\ &= (\lnot P_1 \land \lnot P_2 \land \dots \land \lnot P_n) \rightarrow (Q_1 \lor Q_2 \lor
+           \dots \lor Q_m) 
+    \end{align*}
+  \end{proof}
+\item
+  \begin{enumerate}
+  \item
+    \(\forall x ((Big(x) \land House(x)) \rightarrow Expensive(x))\)
+  \item
+    \(\forall x ((Expensive(x) \land House(x)) \rightarrow Big(x))\)
+  \item
+    \(\forall x ((Big(x) \land House(x)) \rightarrow Expensive(x))\)
+  \item
+    \(\exists x \exists y (Big(x) \land House(x) \land Condo(y) \land
+    (Price(y) > Price(x))) \)
+  \item
+    \((\exists x \exists y (House(x) \land Garden(y) \land Has(x, y)))
+    \land (\forall x \forall y \forall m \forall n (House(x) \land
+    Garden(y) \land Has(x, y) \land House(m) \land Garden(n) \land
+    Has(m, n)) \rightarrow x = m) \)
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item Incorrect.  As written, the translation says that there is at
+    least one pink house in Minneapolis, but does not exclude the
+    possibility that there could be others.  It should be
+    \(\exists x (house(x) \land in(x, Minneapolis) \land color(x,
+    Pink)) \land \forall x \forall y (house(x) \land in(x,
+    Minneapolis) \land color(x, Pink) \land house(y) \land in(y,
+    Minneapolis) \land color(y, Pink)) \rightarrow x = y\)
+  \item Incorrect. As written, the translation says that for every
+    apartment there is some house that is bigger.  It should be
+    \(\exists y \forall x( house(y) \land (appartment(x) \rightarrow
+    bigger(y, x)))\)
+  \item Correct.
+  \item Incorrect.  As written, the translation says that there is
+    some farm and some object such that if the object is a house then
+    the farm is cheaper than it. It should be
+    \(\exists x \exists y (farm(x) \land house(y) \land cheaper(x,
+    y))\)
+  \item Incorrect.  As written, the translation says that for every
+    house, if there is a bathroom, then it is in the house.  It should
+    be \(\forall x \exists y (house(x) bathroom(y) \land in(x, y))\)
+  \end{enumerate}
+\item Proof by resolution:
+  \begin{enumerate}[label=\arabic*.]
+  \item \(G(B)\)
+  \item \(\lnot G(x) \lor H(x)\)
+  \item \(\lnot H(z) \lor I(z)\)
+  \item \(\lnot H(w) \lor J(w, D)\)
+  \item \(\lnot I(B) \lor J(C, B)\)
+  \item \(\lnot I(q) \lor \lnot J(q, y)\)
+  \item \(\lnot G(B) \lor H(B)\) (from 2, \(B/x\)))
+  \item \(H(B)\) (from 1 and 7)
+  \item \(\lnot H(B) \lor J(B, D)\) (from 4, \(B/w\))
+  \item \(\lnot H(B) \lor I(B)\) (from 3, \(B/w\))
+  \item \(I(B)\) (from 10 and 8)
+  \item \(J(B, D)\) (from 8 and 9)
+  \item \(\lnot I(B) \lor \lnot J(B, y)\) (from 6, \(B/q\))
+  \item \(\lnot I(B) \lor \lnot J(B, D)\) (from 13, \(D/y\))
+  \item \(\lnot J(B, D)\) (from 11 and 14)
+  \item \(J(B, D)\land \lnot J(B, D)\) (from 12 and 15)
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item Statements in predicate calculus:
+    \begin{enumerate}[label=\arabic*.]
+    \item\(\forall x (Person(x) \land Rich(x) \land \lnot Stupid(x))
+      \rightarrow Happy(x)\)
+    \item
+      \( \forall x (Person(x) \land Reads(x)) \rightarrow \lnot
+      Stupid(x) \)
+    \item \(Person(JOHN) \land Reads(JOHN) \land Rich(JOHN) \)
+    \item
+      \(\forall x (Happy(x) \land Person(x)) \rightarrow
+      HasExcitingLife(x) \)
+    \end{enumerate}
+  \item Conjunctive normal form:
+    \begin{enumerate}[label=KB\arabic*.]
+    \item
+      \(\lnot Person(x) \lor \lnot Rich(x) \lor Stupid(x) \lor
+      Happy(x)\)
+    \item \(\lnot Person(x) \lor \lnot Reads(x) \lor \lnot Stupid(x)\)
+    \item \(Person(JOHN)\)
+    \item \(Reads(JOHN)\)
+    \item \(Rich(JOHN)\)
+    \item
+      \(\lnot Happy(x) \lor \lnot Person(x) \lor HasExcitingLife(x)\)
+    \end{enumerate}
+\item Proof of \(\exists y HasExcitingLife(y)\):
+  \begin{enumerate}[label=\arabic*.]
+  \item \( \lnot HasExcitingLife(y)\) (assumption)
+  \item
+    \(\lnot Person(JOHN) \lor \lnot Rich(JOHN) \lor Stupid(JOHN) \lor
+    Happy(JOHN)\) (from KB1, \(JOHN / x\))
+  \item
+    \(\lnot Person(JOHN) \lor \lnot Reads(JOHN) \lor \lnot
+    Stupid(JOHN)\) (from KB2, \(JOHN / x\))
+  \item
+    \(\lnot Happy(JOHN) \lor \lnot Person(JOHN) \lor
+    HasExcitingLife(JOHN)\) (from KB6, \(JOHN /x\))
+  \item \( \lnot HasExcitingLife(JOHN)\) (from 1, \(JOHN / y\))
+  \item \(\lnot Rich(JOHN) \lor Stupid(JOHN) \lor Happy(JOHN)\)
+    (from KB3 and 1)
+  \item \(Stupid(JOHN) \lor Happy(JOHN)\) (from 6 and KB5)
+  \item \(\lnot Reads(JOHN) \lor \lnot Stupid(JOHN)\) (from 3 and KB3)
+  \item \(\lnot Happy(JOHN) \lor HasExcitingLife(JOHN)\)
+    (from 4 and KB3)
+  \item \(\lnot Stupid(JOHN)\) (from KB4 and 8)
+  \item \(Happy(JOHN)\) (from 7 and 10)
+  \item \(HasExcitingLife(JOHN)\) (from 9 and 11)
+  \item \(HasExcitingLife(JOHN) \land \lnot HasExcitingLife(JOHN)\)
+    (from 5 and 12)
+ 
+  \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+\end{document}

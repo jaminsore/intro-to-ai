@@ -1,0 +1,16 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 4}
+\maketitle
+\begin{enumerate}[label=\bfseries Question \arabic*:]
+\item
+  \begin{enumerate}
+  \item \(\not Humid \or \not Hot \or Sticky \)
+  \end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{document}

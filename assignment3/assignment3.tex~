@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 3}
+\begin{enumerate}[label=\bfseries Question \arabic*:]
+\item %question 4
+    To answer each part of this question, I will use the fact that the
+    size of the search space \(s\)
+    in \(n\)
+    variables with a set of domains \(D = \{D_1, D_2, \dots D_n\}\)
+    is equal to \( \prod_{i \le n}^{n}{|D_i|} \).
+    From this it follows that the size of \(s\)
+    is \(\Omega (d_{\min} ^ n)\)
+    and \( O (d_{\max}^n ) \)
+    where \(d_{\min} = \min\{|D_i|; D_i \in D\}\)
+    and \(d_{\max} = \max\{|D_i|; D_i \in D\}\).
+    From this if follows that:
+    \begin{enumerate}
+    \item The size of \(s\) is exponential in the number of variables
+    \item The size of \(s\) is linear in the size of the domains.
+    \end{enumerate}
+\item %question 5
+  It is often a good idea to choose the most constrained variable and
+  the least constraining value when we are only interested in finding
+  the first solution rather than all solutions to a CSP. This is
+  because by choosing the most constrained variable, we eliminate all
+  the nodes in the search tree where we would run out of possible
+  values for the most constrained variable, and by choosing the least
+  constraining value for that variable, we eliminate fewer
+  possibilities for the remaining variables making it more likely we
+  will find a solution.
+\item %question 6
+  There are 18 possible solutions to the map-coloring problem for the
+  Australia map with three colors. Tazmania can take any of the three
+  colors regardless of the colors chosen for any of the 6 other
+  states. The colors of the rest of the states are driven by the color
+  choice of Southern Australia which can take any of the three colors.
+  After we have made a choice for Southern Australia, there are really
+  only 2 possible remaining solutions---one where Western Australia is
+  one of the remaining 2 colors or the other since the only
+  restricition is that it can't be the color chosen for Southern
+  Australia.  After that choice has been made there is only one
+  possible color for each of the remaining states since every state
+  other than Tazmania borders Western Australia and one other state.
+  This comes out to \(3 \cdot 3 \cdot 2 = 18 \) possible solutions.
+\end{enumerate}
+\end{document}

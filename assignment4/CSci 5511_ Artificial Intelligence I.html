@@ -1,0 +1,182 @@
+<html>
+<head>
+<title>CSci 5511: Artificial Intelligence I</title>
+<link rel="stylesheet" type="text/css" href="class.css">
+</head>
+
+<body>
+<title> CSci 5511 - Homework 4</title>
+</head>
+
+<h1> Homework 4 -- due Wedenesday November 11</h1>
+
+This homework will be graded out of 100 points.  It will count 7% of the
+grade.  
+<br>
+
+<h4>Written questions</h4>
+
+<ol>
+<li> [10 points]  
+You are given the following set of sentences in propositional calculus:
+  <ol>
+  <li> Humid &rArr; &not; (Hot &and; &not; Sticky) 
+  <li> &not; Hot  &and; Sunny &rArr; Pleasant 
+  <li> Sunny &and; Humid 
+  <li> Sunny &or; &not; Pleasant 
+  </ol>
+Do the following:
+<ol>
+<li> convert them to CNF,
+<li> prove by resolution "Sticky &or; Pleasant",
+<li> Try to prove  "Sticky &and; Pleasant".  Can you prove it? if not, what
+can you conclude?
+</ol>
+
+<li>[10 points]
+Show that every CNF clause can be rewritten in the form
+(P1 &and; .. Pm) &rArr; (Q1 &or; .. Qn)
+where the Ps and Qs are proposition symbols.  
+<br> This form is called implicative normal form or Kowalski 
+form (see question 7.13, page 282 of the textbook).  
+
+<li>[15 points]
+Write the following sentences in predicate calculus, using appropriate
+predicates. The predicates have to be used consistently across sentences.
+<ol>
+<li> All big houses are expensive.
+<li> All expensive houses are big.
+<li> A house is expensive if it is big.
+<li> Some condominiums are more expensive that some big houses.
+<li> There is only one house with a garden.
+</ol>
+
+<li> [15 points]
+For each of the following English sentences, decide if the logic
+sentence is a correct translation or not.  If not
+explain why not and correct it:
+
+<ol>
+<li>There is only one house in Minneapolis that is pink.
+<br>
+exists x house(x) &and; in(x,Minneapolis) &and; color(x,Pink)
+
+<li> There is a house that is bigger than any apartment.
+<br>
+forall x  apartment(x) &rArr; exists y (house(y) &and; bigger(y,x))
+
+<li> Every apartment is cheaper than every house.
+<br>
+forall x apartment(x)  &rArr; [exists y house(y) &and; cheaper(x,y)]
+
+<li> Some farms cost less than some houses.
+<br>
+exists x farm(x) &and; exists y house(y) &rArr; cheaper(x,y)
+
+<li>All houses have at least one bathroom.
+<br>
+forall x [house(x) &and; exists y bathroom(y)] &rArr; in(x,y)
+</ol>
+
+<li> [15 points]
+Prove by resolution that the following set of clauses (in predicate
+calculus) is unsatisfiable. Assume that upper case arguments are constant,
+lower case arguments are variable:
+<ol> 
+<li> G(B) 
+<li> &not; G(x) &or; H(x) 
+<li> &not; H(z) &or; I(z)
+<li> &not; H(w) &or; J(w,D) 
+<li> &not; I(B) &or; J(C,B)
+<li> &not; I(q) &or; &not; J(q,y) 
+</ol>
+
+<li> [15 points]  
+You are given the following knowledge: "All people who are rich and are 
+not stupid are happy. Those people who read are not stupid. John can read and 
+he is rich. Happy people have exciting lives. 
+Do the following:
+<ol>
+<li> write the statements in predicate calculus 
+<li> convert the statements to CNF 
+<li> prove by resolution "can anyone be found with an exciting life?"
+</ol>
+</ol>
+
+<h4>Lisp questions</h4>
+You need to submit the source files and the Lisp output. 
+
+<p>
+For this part we will use the logic package in aima.  If you have
+not downloaded it, go to
+<a href="http://aima.cs.berkeley.edu/lisp/doc/install.html">
+http://aima.cs.berkeley.edu/lisp/doc/install.html</a> and follow the
+instructions.    If you have downloaded it do
+<pre>
+(load "aima.lisp")
+(aima-load 'all)
+(aima-compile)   ; only the first time.  Do (aima-load 'logic) afterward
+(test 'logic)    ; tests the functions in the logic package
+</pre>
+As always read the file 
+<a href="http://aima.cs.berkeley.edu/lisp/logic/test-logic.lisp">
+logic/test-logic.lisp</a> to see examples of
+how to call the functions you will need to use.  Look in particular
+at how to write the logical connectors.
+<p>
+
+Answer the following questions using the aima software:
+<ol>
+<li> [5 points] Show the truth table of the following sentences:
+<ol>
+<li> (P or (not P and Q)) equivalent (P or Q)   
+<li> ((P implies Q) and (not Q)) implies P
+<li> ((P or Q) and (P implies R) and (Q implies R)) implies R
+<li> ((P or Q) and R) equivalent (P or (Q and R))
+</ol>
+What can you conclude for each of the cases, i.e., are they valid? satisfiable?
+unsatisfiable?
+[write this part of the answer as a comment in your lisp file or as a separate file].
+<li> [5 points] 
+<ol>
+For this problem you need to do resolution in propositional 
+calculus using the aima software.
+<li> create a propositional data base
+<code> (setq kb (make-prop-kb)) </code>
+<li> use <code> (tell kb "...")</code>
+where the ... have to be replaced by propositional axpressions to
+represent the exercise we did in class:
+"If the unicorn is mythical, then
+it is immortal but if it is not mythical then it is a mortal mammal.
+If the unicorn is either immortal or a mammal, then it is horned.
+The unicorn is magical, if it is horned."
+<li> use <code>ask</code> to answer the following questions "is 
+the unicorn mythical", "is the unicorn magical", "is the unicorn horned"?
+</ol>
+<li> [10 points] 
+Repeat Question 6 (All people who are rich ... ) using the
+aima software. 
+You'll need first to to create a Horn database
+<code>(setf kb (make-horn-kb))</code>.
+Use <code>tell</code> to add the knowledge,
+and <code>ask</code> to ask the question.
+Make sure you write the clauses as Horn clauses, which means no negative literals
+and at most one literal on the right hand side of the implication.
+</ol>
+
+<address>
+<FONT SIZE=-1>
+<i><B>Copyright:</B> &#169 2015 by the Regents of the University 
+of Minnesota <BR> 
+Department of <A HREF="http://www.cs.umn.edu">Computer Science and
+Engineering</A>. All rights reserved. <BR>
+<B>Comments to: </B><A HREF="mailto:gini@cs.umn.edu">Maria Gini</A><BR>
+<font color="red">Changes and corrections are in red</font>.
+<script language="JavaScript">
+<!---//hide script from old browsers
+    document.write( "Last updated "+ document.lastModified );
+    //end hiding contents --->
+    </script>
+</I> </FONT> </CENTER>
+</body>
+</html>

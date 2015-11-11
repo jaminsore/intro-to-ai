@@ -1,0 +1,114 @@
+; SLIME 2015-02-19
+CL-USER> (load "assignment3.lisp")
+T
+CL-USER> (solve (make-map-coloring-problem) 'csp-backtracking-search)
+Action               State
+======               =====
+                     #<CSP NIL>
+(SA . 2)             #<CSP ((SA (0 1 2) 2 NIL))>
+(WA . 1)             #<CSP ((WA (0 1 2) 1 NIL) (SA (0 1 2) 2 NIL))>
+(NT . 0)             #<CSP ((NT (0 1 2) 0 NIL) (WA (0 1 2) 1 NIL)
+                            (SA (0 1 2) 2 NIL))>
+(Q . 1)              #<CSP ((Q (0 1 2) 1 NIL) (NT (0 1 2) 0 NIL)
+                            (WA (0 1 2) 1 NIL) (SA (0 1 2) 2 NIL))>
+(NSW . 0)            #<CSP ((NSW (0 1 2) 0 NIL) (Q (0 1 2) 1 NIL)
+                            (NT (0 1 2) 0 NIL) (WA (0 1 2) 1 NIL)
+                            (SA (0 1 2) 2 NIL))>
+(V . 1)              #<CSP ((V (0 1 2) 1 NIL) (NSW (0 1 2) 0 NIL)
+                            (Q (0 1 2) 1 NIL) (NT (0 1 2) 0 NIL)
+                            (WA (0 1 2) 1 NIL) (SA (0 1 2) 2 NIL))>
+(T . 2)              #<CSP ((T (0 1 2) 2 NIL) (V (0 1 2) 1 NIL)
+                            (NSW (0 1 2) 0 NIL) (Q (0 1 2) 1 NIL)
+                            (NT (0 1 2) 0 NIL) (WA (0 1 2) 1 NIL)
+                            (SA (0 1 2) 2 NIL))>
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(7) = g(7) + h(0) state:#<CSP ((T (0 1 2) 2 NIL) (V (0 1 2) 1 NIL)
+                                       (NSW (0 1 2) 0 NIL) (Q (0 1 2) 1 NIL)
+                                       (NT (0 1 2) 0 NIL) (WA (0 1 2) 1 NIL)
+                                       (SA (0 1 2) 2 NIL))>>
+CL-USER> (solve (make-map-coloring-problem) 'csp-forward-checking-search)
+Action               State
+======               =====
+                     #<CSP NIL>
+(SA . 2)             #<CSP ((SA (0 1 2) 2 NIL))>
+(WA . 1)             #<CSP ((WA (0 1) 1 NIL) (SA (0 1 2) 2 NIL))>
+(NT . 0)             #<CSP ((NT (0) 0 NIL) (WA (0 1) 1 NIL) (SA (0 1 2) 2 NIL))>
+(Q . 1)              #<CSP ((Q (1) 1 NIL) (NT (0) 0 NIL) (WA (0 1) 1 NIL)
+                            (SA (0 1 2) 2 NIL))>
+(NSW . 0)            #<CSP ((NSW (0) 0 NIL) (Q (1) 1 NIL) (NT (0) 0 NIL)
+                            (WA (0 1) 1 NIL) (SA (0 1 2) 2 NIL))>
+(V . 1)              #<CSP ((V (1) 1 NIL) (NSW (0) 0 NIL) (Q (1) 1 NIL)
+                            (NT (0) 0 NIL) (WA (0 1) 1 NIL) (SA (0 1 2) 2 NIL))>
+(T . 2)              #<CSP ((T (0 1 2) 2 NIL) (V (1) 1 NIL) (NSW (0) 0 NIL)
+                            (Q (1) 1 NIL) (NT (0) 0 NIL) (WA (0 1) 1 NIL)
+                            (SA (0 1 2) 2 NIL))>
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(7) = g(7) + h(0) state:#<CSP ((T (0 1 2) 2 NIL) (V (1) 1 NIL)
+                                       (NSW (0) 0 NIL) (Q (1) 1 NIL)
+                                       (NT (0) 0 NIL) (WA (0 1) 1 NIL)
+                                       (SA (0 1 2) 2 NIL))>>
+CL-USER> (solve (make-map-coloring-problem :ncolors 4) 'csp-backtracking-search) 
+Action               State
+======               =====
+                     #<CSP NIL>
+(SA . 3)             #<CSP ((SA (0 1 2 3) 3 NIL))>
+(WA . 2)             #<CSP ((WA (0 1 2 3) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+(NT . 1)             #<CSP ((NT (0 1 2 3) 1 NIL) (WA (0 1 2 3) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+(Q . 2)              #<CSP ((Q (0 1 2 3) 2 NIL) (NT (0 1 2 3) 1 NIL)
+                            (WA (0 1 2 3) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+(NSW . 1)            #<CSP ((NSW (0 1 2 3) 1 NIL) (Q (0 1 2 3) 2 NIL)
+                            (NT (0 1 2 3) 1 NIL) (WA (0 1 2 3) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+(V . 2)              #<CSP ((V (0 1 2 3) 2 NIL) (NSW (0 1 2 3) 1 NIL)
+                            (Q (0 1 2 3) 2 NIL) (NT (0 1 2 3) 1 NIL)
+                            (WA (0 1 2 3) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+(T . 3)              #<CSP ((T (0 1 2 3) 3 NIL) (V (0 1 2 3) 2 NIL)
+                            (NSW (0 1 2 3) 1 NIL) (Q (0 1 2 3) 2 NIL)
+                            (NT (0 1 2 3) 1 NIL) (WA (0 1 2 3) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(7) = g(7) + h(0) state:#<CSP ((T (0 1 2 3) 3 NIL) (V (0 1 2 3) 2 NIL)
+                                       (NSW (0 1 2 3) 1 NIL)
+                                       (Q (0 1 2 3) 2 NIL) (NT (0 1 2 3) 1 NIL)
+                                       (WA (0 1 2 3) 2 NIL)
+                                       (SA (0 1 2 3) 3 NIL))>>
+CL-USER> (solve (make-map-coloring-problem :ncolors 4) 'csp-forward-checking-search)
+Action               State
+======               =====
+                     #<CSP NIL>
+(SA . 3)             #<CSP ((SA (0 1 2 3) 3 NIL))>
+(WA . 2)             #<CSP ((WA (0 1 2) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+(NT . 1)             #<CSP ((NT (0 1) 1 NIL) (WA (0 1 2) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+(Q . 2)              #<CSP ((Q (0 2) 2 NIL) (NT (0 1) 1 NIL) (WA (0 1 2) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+(NSW . 1)            #<CSP ((NSW (0 1) 1 NIL) (Q (0 2) 2 NIL) (NT (0 1) 1 NIL)
+                            (WA (0 1 2) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+(V . 2)              #<CSP ((V (0 2) 2 NIL) (NSW (0 1) 1 NIL) (Q (0 2) 2 NIL)
+                            (NT (0 1) 1 NIL) (WA (0 1 2) 2 NIL)
+                            (SA (0 1 2 3) 3 NIL))>
+(T . 3)              #<CSP ((T (0 1 2 3) 3 NIL) (V (0 2) 2 NIL)
+                            (NSW (0 1) 1 NIL) (Q (0 2) 2 NIL) (NT (0 1) 1 NIL)
+                            (WA (0 1 2) 2 NIL) (SA (0 1 2 3) 3 NIL))>
+======               =====
+Total of 7 nodes expanded.
+#<NODE f(7) = g(7) + h(0) state:#<CSP ((T (0 1 2 3) 3 NIL) (V (0 2) 2 NIL)
+                                       (NSW (0 1) 1 NIL) (Q (0 2) 2 NIL)
+                                       (NT (0 1) 1 NIL) (WA (0 1 2) 2 NIL)
+                                       (SA (0 1 2 3) 3 NIL))>>
+CL-USER> ;;; The solutions are the same for the same number of colors
+; No value
+CL-USER> ;;; Three colors are enough as solutions were found with 3 colors
+; No value
+CL-USER> ;;; Two colors are not enough ... but let's try anyway ...
+; No value
+CL-USER> (solve (make-map-coloring-problem :ncolors 2) 'csp-backtracking-search)
+No solution found.
+======               =====
+Total of 5 nodes expanded.
+NIL
+CL-USER> 
