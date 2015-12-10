@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 4}
+\maketitle
+\section{Chapter 6 Logical Agents}
+\subsection{Definitions}
+\begin{description}
+\item[assignment] each state in a CSP is defined by an assignment of
+  values to some or all of the variables
+\item[consistent](assignment) An assignment that does not violate any
+  constarints
+\item[complete assignment] every variableis assinged
+\item[solution] a consistent complete assignment
+\item[partial assignment] only some of the values are assinged
+\item[constraint graph] node scorresopond to variables, and a alink
+  connects any two varibale that participate in a constraint
+\item[precedence constraint] Whenever a task \(t_1\)
+  must occur before task \(T_2\),
+  an d\(T_1\)
+  takes duration \(d_1\)
+  to complete, we add an arithmetic constrain of the form
+  \(T_1 + d_1 \le T_2\)
+\item[disjunctive constraint] requirement that two or more tasks must
+  not occur at the same time
+\item[discrete, finite domain]simplest kind of constrain satisfaction
+  problem (map-coloring, scheduling, 8-queens)
+\item[infinite, discrete domain]not possible to describe constraints
+  by enumerating all allowed conbinations of values
+\item[constraint language] language that understands, and can evaluate
+  constraints directly without enumerating sets of allowable value
+\item[linear constraints]constraints in which each variable appears in
+  linear form (e.g. \(T_1 + d_1 \le T_2\) )
+\item[binary constraint] relates two variables
+\item[gloabl constrain] a constraint involving any number of variables
+  (not necessarily all---name is from tradition)
+
+\end{description}
+  
+\end{document}

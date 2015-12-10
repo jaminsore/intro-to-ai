@@ -1,0 +1,128 @@
+; SLIME 2015-02-19
+CL-USER> (load "aima.lisp")
+T
+CL-USER> (aima-load 'all)
+T
+CL-USER> (truth-table "(P | (~P ^ Q)) <=> (P | Q)")
+-----------------------------------------------------------------------------
+ P  Q  ~ P  (~ P) ^ Q  P | ((~ P) ^ Q)  P | Q  (P | ((~ P) ^ Q)) <=> (P | Q) 
+-----------------------------------------------------------------------------
+ F  F   T       F             F           F                  T               
+ T  F   F       F             T           T                  T               
+ F  T   T       T             T           T                  T               
+ T  T   F       F             T           T                  T               
+-----------------------------------------------------------------------------
+NIL
+CL-USER> (truth-table "((P => Q) ^ (~ Q)) => P") 
+--------------------------------------------------------------
+ P  Q  P => Q  ~ Q  (P => Q) ^ (~ Q)  ((P => Q) ^ (~ Q)) => P 
+--------------------------------------------------------------
+ F  F    T      T          T                     F            
+ T  F    F      T          F                     T            
+ F  T    T      F          F                     T            
+ T  T    T      F          F                     T            
+--------------------------------------------------------------
+NIL
+CL-USER> (truth-table "((P | Q) ^ (P => R) ^ (Q => R)) => R")
+-----------------------------------------------------------------------------------------------------------------------------
+ P  Q  R  P | Q  P => R  (P | Q) ^ (P => R)  Q => R  ((P | Q) ^ (P => R)) ^ (Q => R)  (((P | Q) ^ (P => R)) ^ (Q => R)) => R 
+-----------------------------------------------------------------------------------------------------------------------------
+ F  F  F    F      T             F             T                    F                                   T                    
+ T  F  F    T      F             F             T                    F                                   T                    
+ F  T  F    T      T             T             F                    F                                   T                    
+ T  T  F    T      F             F             F                    F                                   T                    
+ F  F  T    F      T             F             T                    F                                   T                    
+ T  F  T    T      T             T             T                    T                                   T                    
+ F  T  T    T      T             T             T                    T                                   T                    
+ T  T  T    T      T             T             T                    T                                   T                    
+-----------------------------------------------------------------------------------------------------------------------------
+NIL
+CL-USER> (truth-table "((P | Q) ^ R) <=> (P | (Q ^ R))")
+----------------------------------------------------------------------------------
+ P  Q  R  P | Q  (P | Q) ^ R  Q ^ R  P | (Q ^ R)  ((P | Q) ^ R) <=> (P | (Q ^ R)) 
+----------------------------------------------------------------------------------
+ F  F  F    F         F         F         F                      T                
+ T  F  F    T         F         F         T                      F                
+ F  T  F    T         F         F         F                      T                
+ T  T  F    T         F         F         T                      F                
+ F  F  T    F         F         F         F                      T                
+ T  F  T    T         T         F         T                      T                
+ F  T  T    T         T         T         T                      T                
+ T  T  T    T         T         T         T                      T                
+----------------------------------------------------------------------------------
+NIL
+CL-USER> (setq kb (make-prop-kb))
+#<a PROP-KB>
+CL-USER> (tell kb "My => Im")
+T
+CL-USER> (tell kb "~My => (~Im ^ Ma)")
+T
+CL-USER> (tell kb "(Im | Ma) => Ho")
+T
+CL-USER> (tell kb "Ho => Ma")
+T
+CL-USER> (ask kb "My")
+NIL
+CL-USER> (ask kb "Ma")
+T
+CL-USER> (ask kb "Ho")
+T
+CL-USER> (set kb (make-horn-kb))
+; Evaluation aborted on #<TYPE-ERROR expected-type: SYMBOL datum: #<a PROP-KB>>.
+CL-USER> (setf kb (make-horn-kb))
+
+; in: SETF KB
+;     (SETF KB (MAKE-HORN-KB))
+; ==>
+;   (SETQ KB (MAKE-HORN-KB))
+; 
+; caught WARNING:
+;   undefined variable: KB
+; 
+; compilation unit finished
+;   Undefined variable:
+;     KB
+;   caught 1 WARNING condition
+#<a HORN-KB>
+CL-USER> (tell kb "Person(x) ^ Rich(x) ^ ~Stupid(x) => Happy(x)")
+WARNING:
+   Person(x) ^ Rich(x) ^ ~Stupid(x) => Happy(x), converted to (=>
+                                                               (AND (PERSON $X)
+                                                                    (RICH $X))
+                                                               (OR (HAPPY $X)
+                                                                   (STUPID
+                                                                    $X))), is not a Horn clause.
+NIL
+CL-USER> (setf kb (make-horn-kb))
+; 
+; caught WARNING:
+;   undefined variable: KB
+; 
+; compilation unit finished
+;   Undefined variable:
+;     KB
+;   caught 1 WARNING condition
+#<a HORN-KB>
+CL-USER> (tell kb "Person(x) ^ Rich(x) ^ Smart(x) => Happy(x)")
+NIL
+CL-USER> (tell kb "Person(x) ^ Reads(x) => Smart(x)")
+NIL
+CL-USER> (tell kb "Person(John)")
+NIL
+CL-USER> (tell kb "Reads(John)")
+NIL
+CL-USER> (tell kb "Rich(John)")
+NIL
+CL-USER> (tell kb "Happy(x) ^ Person(x) => HasExcitingLife(x)")
+NIL
+CL-USER> (ask kb "HasExcitingLife(x)" "x")
+; Evaluation aborted on #<SB-INT:SIMPLE-PROGRAM-ERROR "invalid number of arguments: ~S" {10064300C3}>.
+CL-USER> (ask kb "HasExcitingLife(x)")
+T
+CL-USER> (ask kb "HasExcitingLife(John)")
+T
+CL-USER> (ask-pattern kb "HasExcitingLife(x)" "x") 
+JOHN
+CL-USER> (ask-pattern kb "Rich(x)" "x")
+JOHN
+CL-USER> 

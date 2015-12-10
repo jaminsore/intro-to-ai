@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 4}
+
+\section{Problem Description}
+I work in large-scale K-12 assessment, and as part of test security,
+our test-development team produces several scrambled versions of the
+same test.  It has been shown that in some contexts that the order of
+the questions administered can have an effect on the difficulty of the
+question---a phenomenon known as position effect.  To minimize the
+position effects, our test development department is instructed to
+shuffle only blocks of seven to eight adjacent items, and come up with
+four or possibly more acceptable scramble patterns for each
+block. Once this has been done, the scrambled blocks of items are
+handed off to me, and it is my job to assemble them into a specified
+number of test forms (usually 8) according to the following
+constraints:
+\begin{enumerate}
+\item One form must be unscrambled
+\item No two forms can have more than a specified number of shared
+  block scrambles.
+\item No two forms can have more than a specified number of answer key
+  overlaps
+\item No new sequences of a specified number of the same answer key
+  can be created by the combination of scrambled blocks.
+\end{enumerate}
+\par
+This problem is currently solved by something like randomized DFS with
+backtracking, but it could be improved based on the algorithms we
+learned in this class. Because of the branching factor (
+\end{document}

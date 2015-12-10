@@ -40,7 +40,9 @@
       and \(Pleasant\).
       It could be that it's both \(Sticky\)
       and \(Pleasant\),
-      but we can't tell from this collection of sentences.
+      but we can't tell from this collection of sentences.  In other
+      words, the statement \(Sticky \land Pleasant\)
+      is satisfiable, but not valid in this context.
     \end{enumerate}
   \end{enumerate}
 \item
@@ -87,7 +89,10 @@
     apartment there is some house that is bigger.  It should be
     \(\exists y \forall x( house(y) \land (appartment(x) \rightarrow
     bigger(y, x)))\)
-  \item Correct.
+  \item Incorrect.  As written, the translation says that for every
+    apartment, there is some house that is cheaper. It should be
+    \(\forall x \forall y (house(x) \land apartment(y)) \rightarrow
+    cheaper(x, y)\)
   \item Incorrect.  As written, the translation says that there is
     some farm and some object such that if the object is a house then
     the farm is cheaper than it. It should be
@@ -105,7 +110,7 @@
   \item \(\lnot H(w) \lor J(w, D)\)
   \item \(\lnot I(B) \lor J(C, B)\)
   \item \(\lnot I(q) \lor \lnot J(q, y)\)
-  \item \(\lnot G(B) \lor H(B)\) (from 2, \(B/x\)))
+  \item \(\lnot G(B) \lor H(B)\) (from 2, \(B/x\))
   \item \(H(B)\) (from 1 and 7)
   \item \(\lnot H(B) \lor J(B, D)\) (from 4, \(B/w\))
   \item \(\lnot H(B) \lor I(B)\) (from 3, \(B/w\))
@@ -135,26 +140,26 @@
     \item
       \(\lnot Person(x) \lor \lnot Rich(x) \lor Stupid(x) \lor
       Happy(x)\)
-    \item \(\lnot Person(x) \lor \lnot Reads(x) \lor \lnot Stupid(x)\)
+    \item \(\lnot Person(y) \lor \lnot Reads(y) \lor \lnot Stupid(y)\)
     \item \(Person(JOHN)\)
     \item \(Reads(JOHN)\)
     \item \(Rich(JOHN)\)
     \item
-      \(\lnot Happy(x) \lor \lnot Person(x) \lor HasExcitingLife(x)\)
+      \(\lnot Happy(z) \lor \lnot Person(z) \lor HasExcitingLife(z)\)
     \end{enumerate}
-\item Proof of \(\exists y HasExcitingLife(y)\):
+\item Proof of \(\exists m HasExcitingLife(m)\):
   \begin{enumerate}[label=\arabic*.]
-  \item \( \lnot HasExcitingLife(y)\) (assumption)
+  \item \( \lnot HasExcitingLife(m)\) (assumption)
   \item
     \(\lnot Person(JOHN) \lor \lnot Rich(JOHN) \lor Stupid(JOHN) \lor
     Happy(JOHN)\) (from KB1, \(JOHN / x\))
   \item
     \(\lnot Person(JOHN) \lor \lnot Reads(JOHN) \lor \lnot
-    Stupid(JOHN)\) (from KB2, \(JOHN / x\))
+    Stupid(JOHN)\) (from KB2, \(JOHN / y\))
   \item
     \(\lnot Happy(JOHN) \lor \lnot Person(JOHN) \lor
-    HasExcitingLife(JOHN)\) (from KB6, \(JOHN /x\))
-  \item \( \lnot HasExcitingLife(JOHN)\) (from 1, \(JOHN / y\))
+    HasExcitingLife(JOHN)\) (from KB6, \(JOHN /z\))
+  \item \( \lnot HasExcitingLife(JOHN)\) (from 1, \(JOHN / m\))
   \item \(\lnot Rich(JOHN) \lor Stupid(JOHN) \lor Happy(JOHN)\)
     (from KB3 and 1)
   \item \(Stupid(JOHN) \lor Happy(JOHN)\) (from 6 and KB5)

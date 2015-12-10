@@ -1,0 +1,19 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm}
+\begin{document}
+\author{Benjamin Sorenson} \title{Assignment 4}
+\maketitle
+\begin{enumerate}[label=\bfseries Question \arabic*:]
+\item 
+  \begin{enumerate}
+    \begin{align*}
+      Action: & (GoAndPick(x, y, ) \\
+              & Precond: At(Robot, x) \land EmptyHand(Robot) \land At(o, y) \\
+              & Effect: \lnot At(robot, x) \land \not EmptyHand(robot) \land  
+    \end{align*}
+  \end{enumerate}
+\end{documnet}
