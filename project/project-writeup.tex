@@ -1,0 +1,523 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{booktabs}
+%\setlength{\parindent}{4em}
+%\setlength{\parskip}{1em}
+%\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+\author{Benjamin Sorenson} \title{Final Project}
+\maketitle
+
+\begin{abstract}
+  As a matter of test security (read, cheating deterrent). The state
+  of Pennsylvania has required the use of scrambled test forms for its
+  high-stakes K-12 assessments, the PSSA and Keystone Exams. Given the
+  requirements that the each scrambled form still meet the test
+  blueprint set out by the state,
+\end{abstract}
+\section{Description}
+\par
+As a matter of test security, Pennsylvania requires that both its
+summative assessment PSSA and its graduation requirement Keystone
+exams are scrambled. This is to prevent both student to student
+cheating as deter administrator manipulation of answer documents
+(e.g., correcting answers after the fact).
+\par
+When each test is constructed, test development specialists must
+guidlines ensuring psychometric and content requirements are met. For
+example, one guideline may be that for multiple choice questions there
+can be no sequences of 4 or more of the same answer key in a row.
+Another might be that the first question on the test must be of medium
+to low difficulty.  When constructing scrambled forms, care must be
+taken so that these test construcion guidelines are followed to the
+extent that it is possible.
+\par
+Prior to programmatic scrambling,the work of constructing scrambled
+forms was done by hand, often incurring a significant cost to the
+state of Pennsylvania as members of the state education board would
+have to travel to Minnesota to work with content specialists, and
+determine the best scrambling patterns meeting the test
+blueprint. This process could take weeks to complete, and for this
+reason, this problem is of practical interest.
+\par
+Form scrambling happens in two stages.  First, content and test
+development specialists construct a single, ideal form called the
+``Master Core''.  Then, using the following guidelines, they split the
+Master Core into blocks of multiple choice items. Once these blocks
+have been constructed, they are passed off, and assembled in to 7
+additional unique forms.
+
+The complete description from 2014 PSSA technical report
+\begin{itemize}
+\item Items cannot move between blocks.
+\item DRC and PDE content specialists will work to ensure that the
+  scrambling does not result in making content more difficult than the
+  Master Core item sequence. For example, items of similar cognitive
+  complexity will be swapped rather than random scrambling.
+\item A block scramble pattern is only valid if it does not contain an
+  invalid key distribution within the block. Additional checks for an
+  invalid key distribution across blocks must be made when combining
+  block scramble patterns to create forms. For example, scrambling
+  must not create more than three (3) of the same key positions in a
+  row.
+\item A block scramble pattern is only valid if it does not contain an
+  invalid standard (AA/EC) distribution within a block. Additional
+  checks for standard distribution across blocks must be made when
+  combining block scramble patterns to create forms.  An exception was
+  made for one mathematics scramble for each grade which ordered items
+  within block by eligible content per PDE request.  Scrambling should
+  not place a difficult item as the first item in a section. The first
+  item in a block that does NOT begin a section may be a difficult
+  item since blocks are invisible to the student.
+\item For passage-based items, a block scramble pattern is only valid
+  if it does not create dissonance between the items and passage(s).
+\item Scrambling should not place a difficult item as the first item
+  in a passage set.
+\item Within a set of items connected to a paired set of passages, an
+  item associated with both passages can be swapped only with another
+  item associated with both passages.  (These items must remain at the
+  end of the set of items associated with the passage set.)
+
+\end{itemize}
+
+\par
+In addition to the constraints above, further constraints are placed
+on the block assembly to ensure that an application of incorrect key
+can be easily detected. For this reason, the pair-wise answer key
+similarity between forms is restricted. Ideally, each form's key would
+overlap with any other form's key in the pool of forms no more than
+chance.  In practice, however, because the scrambling of each block is
+not random, it is difficult to meet this ideal given a sufficiently
+large pool. This is partly due to the fact that the number of pairs in
+a given pool increases quadratically, and partly due to the fact that
+scrambling within blocks is not random, and key distributions are not
+random within blocks.  Given this, the usual guideline is that answer
+key overlap between any two forms not exceed the lowest performance
+cut.  Although, the state of Pennsylvania does give out letter grades,
+this requirement is equivalent to saying that the misapplication of an
+answer key to a form must never result in a grade higher than an
+``F''.
+\par
+The current approach to solving this problem is by randomized
+depth-first search using a matrix representation.  Each row of the
+matrix represents a scrambled form, and each column corresponds to a
+block number.  The value in each cell represents a scramble pattern.
+For example the matrix
+\[
+A =
+\begin{bmatrix}
+  0 & 0 & 0 \\
+  1 & 0 & 2 \\
+  2 & 1 & 1
+\end{bmatrix}
+\]
+would represent a solution to problem in which there were 2 forms
+needed in addition to the Master Core, and \(a_{21}=1\)
+means that the form-1 used scramble pattern 1 for block 1. Zeros
+indicate the use of a Master Core (unscrambled) block.  For instance
+\(a_{22} = 0\)
+indicates that block-2 of form-1 is an unscrambled block.
+\begin{itemize}
+\item Each block scramble pattern must be used once.
+\item No block scramble pattern can be used more than a user-specified
+  number of times
+\end{itemize}
+\begin{algorithm}
+  \begin{algorithmic}
+   
+    \Function{\textsc{Scramble}}{$\mathit{max\_restarts}$}\State
+    $\mathit{more\_steps\_back} \gets 0$ \State
+    $\mathit{restarts} \gets 0$ \State
+    $\mathit{assignment} \gets [(0, 0, \dots ,0)]$ \State
+    $\mathit{forced\_choice} \gets 0$ \Comment
+    $\mathit{forced\_choice}$ is set by
+    \textsc{GetEligibleBlockScrambles}
+    \While{$\mathit{restarts} < \mathit{max\_restarts}$} \For{$i = 1$
+      \textbf{to} $\mathit{max\_iterations}$} \State
+    $\mathit{eligible\_block\_scrambles} \gets$
+    \Call{\textsc{GetEligibleBlockScrambles}}{$\mathit{assignment}$}
+    \If{$\text{there are no choices for one or more blocks}$}
+    \textbf{break}\Else \State
+    $\mathit{scramble\_pattern} \gets \text{random choice from each
+      eligible block}$
+    \EndIf
+    \If{$\mathit{scramble\_pattern}$ satisfies constraints} \State add
+    $\mathit{scramble\_pattern}$ to $\mathit{assignment}$
+    \EndIf \If{all forms assinged} \State \Return
+    $\mathit{assignment}$ \EndIf
+    \EndFor
+    \If{$\mathit{forced\_choice} > 0$}
+    \If{$\mathit{forced\_choice}-\mathit{more\_steps\_back} > 1$}
+    \State remove all but the first
+    $\mathit{forced\_choice} - \mathit{more\_steps\_back}$ forms from
+    $\mathit{assignment}$ \State
+    $\mathit{more\_steps\_back} = \mathit{more\_steps\_back} + 1$
+    \Else\State $\mathit{assignment} \gets [(0, 0, \dots ,0)]$ \State
+    $\mathit{restarts} = \mathit{restarts} + 1$ \State
+    $\mathit{more\_steps\_back} = 0$
+    \EndIf\State
+    $\mathit{forced\_choice} = 0$
+    \ElsIf{$\mathit{assingment.length} - \mathit{more\_steps\_back} >
+      1$}
+    \State remove all but the first
+    $\mathit{assignment.length} - \mathit{more\_steps\_back} - 1$
+    forms from $\mathit{assignment}$ \State
+    $\mathit{more\_steps\_back} = \mathit{more\_steps\_back} + 1$
+    \Else \State $\mathit{assignment} \gets [(0, 0, \dots ,0)]$ \State
+    $\mathit{restarts} = \mathit{restarts} + 1$ \State
+    $\mathit{more\_steps\_back} = 0$
+    \EndIf
+    \EndWhile \State \Return \textbf{None}
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
+The idea behind \textsc{Scramble} is that at the shallower depths, it
+is easy to find many assignments that will likely satisfy the
+constraints, but it is also easy to unwittingly paint yourself into a
+corner along the way.  It's difficult to know for sure which variable
+assignment caused you to fail, but it's not worth the effort to keep
+checking each possible variable at the current depth and backtrack one
+level.  In this representation of the problem, for a number of desired
+forms (variables) \(n_f\),
+number of blocks \(b\),
+and number of scramble patterns per block \(s\)
+(assuming a equal number of scramble patterns per block), the
+branching factor is \(s^b\),
+and the depth of the solution is \(n_f\).
+So, rather, than search through each \(s^b\)
+solution, \textsc{Scramble} lets the user set the number of iterations
+before the algorithm gives up and decides that it's \emph{probably} at
+a dead-end.  Once it has determined that it's likely at a dead-end, it
+first backs up one level, but it also keeps track of how many times
+it's had to back up---each time, it backs up one more level than the
+previous time.  Once it has backed up all the way to the root, this is
+counted as a restart. After a user-specified maximum number of
+restarts, the algorithm can either return \textbf{None} or the current
+partial assignment---for this project, it was set to return
+\textbf{None}.
+\par
+While it is not possible to know for sure what assignment likely
+caused it to run into a dead-end, the function
+\textsc{GetEligibleBlockScrambles} employs a simple heuristic to help
+determine how far we should backtrack.  When it is called on the
+current assignment, it counts the number of block scrambles that are
+still available to use, because of the constraint that all scrambles
+must be used at least once, it applies to pigeon hole principle to
+determine if there are any blocks that \emph{must} be used.  If there
+are any, it only returns those as the eligible or legal choices for
+the next assignment(s), and indicates where this first occurred. If no
+solution is found, then \textsc{Scramble} backs up to the point marked
+by \textsc{GetEligibleScrambles} plus any additional levels indicated
+by $\mathit{more\_steps\_back}$.
+\par
+The purpose of this project was to improve on the current algorithm by
+employing backtracking search.  I chose the to use the software
+aima-python provided by Peter Norvig.  I changed the representation of
+the problem so that each (form, block) pair is a single variable. This
+new representation changes the problem slightly. I had a difficult
+time figuring what should and shouldn't be considered a neighbor \dots
+in some sense every variable is a neighbor with every other variable
+since there are global constraints that care about the assignment as a
+whole---or rather the pool of forms.  Eventually (after some
+experimentation) I landed on the variable representation of (form,
+block) pairs where instead of representing indices of a matrix, the
+pair represents an atomic variable stored in a dictionary.  Neighbors
+are those (form, block) pairs whose answer keys share a border with
+\begin{enumerate}
+\item While the number of restarts is less than the maximum number of
+  allowed restarts \dots
+  \begin{enumerate}
+  \item randomly choose a complete form by randomly selecting a block
+    scramble from each of the eligible block scrambles. If there are
+    more or as many additional forms needed than there are eligible
+    block scrambles, only unused block scrambles are considered
+    eligible.  Otherwise, all block scrambles that have been used
+    fewer than the maximum number of times allowed are considered
+    eligible.
+  \item If the selected form satisfies the border and key overlap
+    constraints, add it to the solution, and select another
+  \item If a complete solution is found, return it
+  \item Otherwise \dots
+    \begin{enumerate}
+    \item If there was a forced choice during the construction of the
+      current partial solution, and jumping back to the partial
+      solution where the first forced choice occurred plus any
+      additional steps back---if this means you jump all the way back
+      to the root, count it as a restart, otherwise increment the
+      \textsc{MoreStepsBack} counter.
+    \item If the start
+    \end{enumerate}
+  \end{enumerate}
+\item
+\end{enumerate}
+
+\section{Background}
+\par
+In response to test security issues raised in prior PSSA
+administrations, multiple scrambled patterns of operational forms were
+constructed for each mathematics, reading, and science assessment
+since 2013. The core form was constructed following the past test
+construction and equating guidelines and will be referred to as the
+Master Core throughout the remainder of this document. Based on
+previous TAC recommendation, the Master Core is the pattern of the
+test that would have been administered to all students in the absence
+of scrambling. More importantly, the data obtained from administration
+of the Master Core were used for operational MC item calibration for
+the 2014 PSSA.
+\par
+Once the Master Core was constructed and approved, DRC and PDE content
+specialists built seven scrambled patterns of the Master Core for each
+content and grade. OE items were not scrambled so each OE item
+appeared in the same position on every form. Some MC items also appear
+in the same position on multiple forms due to content constraints. In
+some content areas and grades the number of field-test forms was
+greater than the number of scrambled patterns. In these instances the
+Master Core and scrambled patterns were repeated with no specific
+pattern appearing more than three times. Due to the limited enrollment
+for the PSSA CBT, only three forms were offered. These forms included
+the accommodation form, a Master Core form, and one additional
+scrambled form; therefore, these forms have slightly higher
+participation than other forms.
+\par
+When the Master Core was built, the linking position rules were
+observed for all core-linking and equating block items. The Master
+Core was used at least as often, or more often, than any scrambled
+version of the core form. Since form 1 was used for all accommodated
+forms (e.g., Braille, Large Print, Audio, and Spanish) it was never
+designated as a Master Core. The specific forms presenting the Master
+Core vary across grades within each content area. For example, the
+Master Core for mathematics Grade 8 is repeated on Forms 2, 9, and 13
+while the Master Core for Grade 7 is repeated on Forms 2, 10, and
+11. Given that all forms were spiraled at the student level, the
+distribution of forms is reasonably uniform. The exception is Form 1,
+which had higher participation due to the fact that it is the only
+form used for accommodations.
+\par
+Based on TAC recommendations to minimize possible item position
+effects, each section of the Master Core was divided into blocks of
+non-overlapping MC items. Recall that the OE items were not part of
+the scrambling. The blocks generally contained six to seven MC items
+(or one passage), but the block sizes varied depending on the content
+and test session. Within each block, MC items were scrambled following
+general psychometric and content guidelines to create up to five
+versions of the block in addition to the Master Core sequencing. The
+blocks were assembled to create seven scrambled versions of the Master
+Core. Table 9–3 shows the mathematics Grade 8 scrambled form
+structure. The core was divided into nine blocks (labeled “1”–“9”) and
+each block was scrambled in five different permutations (labeled I,
+II, III, IV, and M). So, for example, Form 1 was constructed with
+scrambled block version “I” for all nine blocks. Seven scrambled
+variations (labeled A, B, C, D, E, F, and G in the “Pattern” column)
+of the Master Core were used in addition to the Master Core across the
+twenty field-test forms. The Master Core was used on Forms 2, 9, and
+13.
+\par
+The problem of test scrambling arose out of the need to prevent
+answer-copying between students, and make it more difficult for
+administrators to change student answers on a large scale after the
+test had been completed. When constructing standardized tests, often
+there is an overall test blueprint that test developers must adhere to
+when selecting items. In addition to content constraints, there are
+constraints such as the overall difficulty of the form or the key
+distribution (e.g., too many of the same answer key in a row, may
+cause some students to change otherwise correct answers).
+\par
+When constructing a scrambling plan several factors were considered.
+\begin{enumerate}
+\item How easily can we detect a misapplied key? That is, the answer
+  keys between any pair of test forms must be different enough so that
+  the misapplication of one form's answer key to another cannot result
+  in a passing score.  The pair-wise dissimilarity between forms is
+  also desirable because it means that an unskilled cheater cannot
+  copy from someone using a different form and get a passing score.
+\item The difficulty of each item must remain as unaffected as
+  possible by the change in position.  Students tend to get fatigued
+  through the administration of an exam so moving an item
+\end{enumerate}
+\section{Problem Description}
+\par
+Prior to scrambling the Master Core, DRC and PDE content specialists
+developed the following general psychometric and content guidelines:
+\begin{itemize}
+\item Items cannot move between blocks.
+\item DRC and PDE content specialists will work to ensure that the
+  scrambling does not result in making content more difficult than the
+  Master Core item sequence. For example, items of similar cognitive
+  complexity will be swapped rather than random scrambling.
+\item A block scramble pattern is only valid if it does not contain an
+  invalid key distribution within the block. Additional checks for an
+  invalid key distribution across blocks must be made when combining
+  block scramble patterns to create forms. For example, scrambling
+  must not create more than three (3) of the same key positions in a
+  row.
+\item A block scramble pattern is only valid if it does not contain an
+  invalid standard (AA/EC) distribution within a block. Additional
+  checks for standard distribution across blocks must be made when
+  combining block scramble patterns to create forms.  An exception was
+  made for one mathematics scramble for each grade which ordered items
+  within block by eligible content per PDE request.  Scrambling should
+  not place a difficult item as the first item in a section. The first
+  item in a block that does NOT begin a section may be a difficult
+  item since blocks are invisible to the student.
+\item For passage-based items, a block scramble pattern is only valid
+  if it does not create dissonance between the items and passage(s).
+\item Scrambling should not place a difficult item as the first item
+  in a passage set.
+\item Within a set of items connected to a paired set of passages, an
+  item associated with both passages can be swapped only with another
+  item associated with both passages.  (These items must remain at the
+  end of the set of items associated with the passage set.)
+
+\end{itemize}
+\section{Experimental Design}
+To test the two algorithms, I chose a set of some of the more
+difficult real-world data, and ran each algorithm under varying
+conditions.  The conditions covered are:
+\begin{itemize}
+\item The total number of forms was varied between 5 and 20 stepping
+  by 3
+\item The total amount of answer-key overlap varied between 25\% and
+  50\% of the total answer-key string stepping by 5\%
+\item For each of the above conditions, AIMA version of the algorithm
+  was run using a least-used-variable heuristic and variable
+  shuffling---once with neither, once with variable shuffling only,
+  once with least-used-variable heuristic only, and once with both
+\item Since the AIMA conditions don't have any effect on the
+  performance of the production version, and the production version
+  relies on random choices at each node, each of the conditions for
+  the AIMA version served as an opportunity for a replication of the
+  production version's results
+\end{itemize}
+The each combination of conditions mentioned above were 4 times
+(because that's how many processors I have \dots), for a total of
+\(4 \time 2 \times 2 \times 5 \times 6 = 2400 \)
+total runs constituting 4 replications for each combination of
+conditions for the AIMA version, and 16 replications of each condition
+for production version. The results are summarized in tables Most
+conditions have no effect on the current implementation, so, they were
+used as a replications for the current algorithm.  Based on experience
+its performance can vary greatly, on the same data set so looking at a
+single run under a single condition, can paint an unrealistic picture
+of it's performance.
+\par
+\begin{table}
+  \centering
+  \begin{tabular}{llrrrr}
+    \toprule
+    &      &   time &      &        &        \\
+    &      &   mean &  std &    min &    max \\
+    \midrule
+    5  & 0.25 &        &      &        &        \\
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 &   0.13 & 0.01 &   0.12 &   0.14 \\
+    & 0.40 &   0.14 & 0.05 &   0.10 &   0.20 \\
+    & 0.45 &   0.10 & 0.02 &   0.08 &   0.11 \\
+    & 0.50 &   0.11 & 0.00 &   0.10 &   0.11 \\
+    \hline
+    8  & 0.25 &   0.11 & 0.01 &   0.09 &   0.11 \\
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.40 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.45 &   0.60 & 0.02 &   0.57 &   0.62 \\
+    & 0.50 &   0.48 & 0.05 &   0.44 &   0.53 \\
+    \hline
+    11 & 0.25 &   0.43 & 0.02 &   0.41 &   0.45 \\
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.40 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.45 &   3.77 & 0.05 &   3.71 &   3.82 \\
+    & 0.50 &   1.55 & 0.11 &   1.39 &   1.64 \\
+    \hline
+    14 & 0.25 &   1.13 & 0.07 &   1.06 &   1.20 \\
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.40 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.45 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.50 &   3.01 & 0.08 &   2.93 &   3.11 \\
+    17 & 0.25 &   2.77 & 0.10 &   2.70 &   2.92 \\
+    \hline
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.40 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.45 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.50 &   6.80 & 0.60 &   6.17 &   7.61 \\
+    \hline
+    20 & 0.25 &   6.09 & 0.36 &   5.59 &   6.41 \\
+    & 0.30 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.35 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.40 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.45 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    & 0.50 & 240.00 & 0.00 & 240.00 & 240.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+And then there is some text ...
+\begin{table}
+  \centering
+  \begin{tabular}{llrrrrr}
+    \toprule
+    &      &  time &        &       &        &        \\
+    &      & count &   mean &   std &    min &    max \\
+    nforms & pct\_key\_overlap &       &        &       &        &        \\
+    \midrule
+    5  & 0.25 &    16 &  15.94 &  8.91 &   2.18 &  26.96 \\
+    & 0.30 &    16 &   0.56 &  0.99 &   0.00 &   3.88 \\
+    & 0.35 &    16 &   0.19 &  0.45 &   0.00 &   1.61 \\
+    & 0.40 &    16 &   0.06 &  0.24 &   0.00 &   0.97 \\
+    & 0.45 &    16 &   0.20 &  0.28 &   0.00 &   0.83 \\
+    & 0.50 &    16 &   0.22 &  0.39 &   0.00 &   1.23 \\
+    \hline
+    8  & 0.25 &    16 &  78.60 & 19.64 &  43.98 &  93.37 \\
+    & 0.30 &    16 & 118.54 & 22.28 &  62.10 & 132.78 \\
+    & 0.35 &    16 &   1.13 &  1.35 &   0.06 &   5.15 \\
+    & 0.40 &    16 &   0.23 &  0.44 &   0.01 &   1.27 \\
+    & 0.45 &    16 &   0.12 &  0.45 &   0.01 &   1.79 \\
+    & 0.50 &    16 &   0.07 &  0.17 &   0.01 &   0.51 \\
+    \hline
+    11 & 0.25 &    16 &  88.02 &  4.10 &  81.77 &  97.74 \\
+    & 0.30 &    16 & 114.09 &  4.98 & 107.94 & 125.77 \\
+    & 0.35 &    16 & 162.70 &  5.19 & 152.71 & 170.28 \\
+    & 0.40 &    16 &   0.91 &  1.08 &   0.15 &   4.65 \\
+    & 0.45 &    16 &   0.09 &  0.05 &   0.03 &   0.24 \\
+    & 0.50 &    16 &   0.04 &  0.02 &   0.02 &   0.08 \\
+    \hline
+    14 & 0.25 &    16 &  84.17 &  2.55 &  79.04 &  89.22 \\
+    & 0.30 &    16 & 114.12 &  3.90 & 106.48 & 122.46 \\
+    & 0.35 &    16 & 161.89 &  3.86 & 155.45 & 168.40 \\
+    & 0.40 &    16 & 240.00 &  0.00 & 240.00 & 240.00 \\
+    & 0.45 &    16 &   1.13 &  0.91 &   0.09 &   2.74 \\
+    & 0.50 &    16 &   0.47 &  0.61 &   0.03 &   1.66 \\
+    \hline
+    17 & 0.25 &    16 &  84.36 &  2.48 &  81.30 &  90.54 \\
+    & 0.30 &    16 & 118.22 &  4.54 & 112.19 & 125.47 \\
+    & 0.35 &    16 & 171.89 & 18.89 & 156.47 & 240.00 \\
+    & 0.40 &    16 & 242.97 &  4.18 & 240.00 & 251.32 \\
+    & 0.45 &    16 &  35.76 & 29.44 &   1.51 &  86.20 \\
+    & 0.50 &    16 &   2.28 &  2.39 &   0.24 &   8.69 \\ 
+    \hline
+    20 & 0.25 &    16 &  86.28 &  3.13 &  82.21 &  92.09 \\
+    & 0.30 &    16 & 116.27 &  2.99 & 111.47 & 122.35 \\
+    & 0.35 &    16 & 164.82 &  2.70 & 159.52 & 169.72 \\
+    & 0.40 &    16 & 241.38 &  3.23 & 240.00 & 250.92 \\
+    & 0.45 &    16 & 240.00 &  0.00 & 240.00 & 240.00 \\
+    & 0.50 &    16 & 240.00 &  0.00 & 240.00 & 240.00 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Backtacking Search with Shuffling and Least Used Variable
+    heuristic}
+\end{table}
+\par
+I chose the conditions to
+\section{Results}
+\section{Conclusions}
+
+\end{document}
